@@ -29,9 +29,14 @@ public class DoExamControl {
     @Qualifier("doExamService")
     private DoExamService doExamService;
     @RequestMapping(params = "action=submit")
-    public void controlExamSubmit(HttpServletRequest request){
-        Map<String, String[]> keyMap = new HashMap<String, String[]>();
-        keyMap = request.getParameterMap();
+    public String onSubmit(HttpServletRequest request,Model model){
+        doExamService.saveExam(new ExamModel(currentPaper.getPaperName()),currentAnswer);
+        int score=doExamService.calcuResult(currentPaper,currentAnswer);
+//        Map<String, String[]> keyMap = new HashMap<String, String[]>();
+//        keyMap = request.getParameterMap();
+        //TODO implement
+        model.addAttribute("score",score);
+        return "examResult";
     }
     @RequestMapping(params = "action=getAvailablePaper",method = RequestMethod.GET)
     public String onGetAvailablePaper(HttpSession session, Model model){

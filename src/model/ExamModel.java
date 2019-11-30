@@ -1,14 +1,23 @@
 package model;
 
+import java.util.Date;
+
 public class ExamModel {
-    private String addedTime;
+    private Date addedTime;
     private int id;
     private String name;
-    public String getAddedTime() {
+    public ExamModel(){}
+    public ExamModel(String paperName){
+        this.name=paperName;
+        this.id=0;
+        this.setAddedTime(new Date());
+    }
+
+    public Date getAddedTime() {
         return addedTime;
     }
 
-    public void setAddedTime(String addedTime) {
+    public void setAddedTime(Date addedTime) {
         this.addedTime = addedTime;
     }
 

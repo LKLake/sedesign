@@ -18,31 +18,16 @@ public class DoExamServiceImpl implements DoExamService {
     @Qualifier("ExamDao")
     private ExamDao examDao;
 
-    @Override
-    public List<Question> getPaper(String userId) throws Exception {
-        return null;
-    }
-
-    @Override
-    public void saveExam() {
-
-    }
-
-    @Override
-    public int calcuResult(Map<String, String[]> keyMap) throws Exception {
-        return 0;
-    }
 
     public List<ExamModel> findAvailablePaper(String userId){
-        //TODO implement
         ArrayList<ExamModel>examModelList=new ArrayList<ExamModel>();
         ExamModel tmp=new ExamModel();
         tmp.setName("第一次测试卷");
         tmp.setId(1);
-        tmp.setAddedTime("2019-10-10 10-10-10");
+        tmp.setAddedTime(new Date());
         examModelList.add(tmp);
         return examModelList;
-
+        //TODO implement
     }
 
     @Override
@@ -59,7 +44,14 @@ public class DoExamServiceImpl implements DoExamService {
         paper.setSingleQuestionList(singleQuestion);
         return paper;
     }
-
+    public void saveExam(ExamModel examModel,Map<Integer,String> currentAnswer){
+        return;
+        //TODO implement
+    }
+    public int calcuResult(Paper paper,Map<Integer,String > currentAnswer){
+        return 98;
+        //TODO implement
+    };
 
 
     /*@Override
