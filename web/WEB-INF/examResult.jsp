@@ -3,4 +3,7 @@
 <p class="examResult" align="center">
 	作业已提交，您本次作业的成绩为：<font color="red">${score }</font>分！
 </p>
+<button>
+    <a href="${pageContext.request.contextPath}/home">回到主页</a>
+</button>
 		

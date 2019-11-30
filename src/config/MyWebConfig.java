@@ -24,6 +24,11 @@ public class MyWebConfig extends WebMvcConfigurerAdapter {
         return resolver;
     }
 
+
+    //    @Override
+//    public void configurePathMatch(PathMatchConfigurer configurer) {
+//        configurer.setUseSuffixPatternMatch(false);
+//        super.configurePathMatch(configurer);
 //    @Override
 //    public void configurePathMatch(PathMatchConfigurer configurer) {
 //        configurer.setUseSuffixPatternMatch(false);

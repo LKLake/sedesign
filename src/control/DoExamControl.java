@@ -30,7 +30,7 @@ public class DoExamControl {
     private DoExamService doExamService;
     @RequestMapping(params = "action=submit")
     public String onSubmit(HttpServletRequest request,Model model){
-        doExamService.saveExam(new ExamModel(currentPaper.getPaperName()),currentAnswer);
+        doExamService.saveExam(new ExamModel(currentPaper,currentAnswer));
         int score=doExamService.calcuResult(currentPaper,currentAnswer);
 //        Map<String, String[]> keyMap = new HashMap<String, String[]>();
 //        keyMap = request.getParameterMap();
@@ -40,7 +40,7 @@ public class DoExamControl {
     }
     @RequestMapping(params = "action=getAvailablePaper",method = RequestMethod.GET)
     public String onGetAvailablePaper(HttpSession session, Model model){
-        List<ExamModel> avaliablePaperList=doExamService.findAvailablePaper(
+        List<Paper> avaliablePaperList=doExamService.findAvailablePaper(
                 (String) session.getAttribute("currentUserId"));
         model.addAttribute("availablePaperList",avaliablePaperList);
         return "selectPaper";

@@ -8,7 +8,7 @@ import bean.TeacherBean;
 public class TeacherDaoImpl extends BaseDao implements TeacherDao, PostgreSQL {
     public TeacherBean getUserByUserIdAndPassword(String userId, String password) throws Exception
     {
-        String sql = "select * from t_student where user_id = ? and password = ?";
+        String sql = "select * from t_teacher where user_id = ? and password = ?";
         return esql.query(TeacherBean.class, sql, userId, password);
     }
 }

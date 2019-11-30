@@ -19,14 +19,12 @@ public class DoExamServiceImpl implements DoExamService {
     private ExamDao examDao;
 
 
-    public List<ExamModel> findAvailablePaper(String userId){
-        ArrayList<ExamModel>examModelList=new ArrayList<ExamModel>();
-        ExamModel tmp=new ExamModel();
-        tmp.setName("第一次测试卷");
-        tmp.setId(1);
-        tmp.setAddedTime(new Date());
-        examModelList.add(tmp);
-        return examModelList;
+    public List<Paper> findAvailablePaper(String userId){
+        ArrayList<Paper>paperList=new ArrayList<Paper>();
+        Paper tmp1=new Paper();
+        tmp1.setPaperName("第一次测试卷");
+        paperList.add(tmp1);
+        return paperList;
         //TODO implement
     }
 
@@ -44,7 +42,7 @@ public class DoExamServiceImpl implements DoExamService {
         paper.setSingleQuestionList(singleQuestion);
         return paper;
     }
-    public void saveExam(ExamModel examModel,Map<Integer,String> currentAnswer){
+    public void saveExam(ExamModel examModel){
         return;
         //TODO implement
     }

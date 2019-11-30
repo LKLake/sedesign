@@ -20,7 +20,7 @@
 						<select id="paperId" name="paperId">
 							<option value="">请选择...</option>
 							<c:forEach var="availablePaper" items="${availablePaperList}">
-								<option value="${availablePaper.id}" >${availablePaper.name}</option>
+								<option value="${availablePaper.id}" >${availablePaper.paperName}</option>
 							</c:forEach>
 						</select>
 					</td>

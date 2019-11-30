@@ -1,7 +1,7 @@
 package model;
 
 public class StudentModel extends UserModel {
-    public StudentModel(String name, String id){
+    public StudentModel(String id, String name){
         super(id,name);
     }
 }

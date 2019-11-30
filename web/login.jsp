@@ -22,6 +22,8 @@
 			alert("密码不能为空！");
 			return false;
 		}
+		$('#password').value="";
+		$('#id').value="";
 		return true;
 	}
 	
@@ -33,7 +35,7 @@
 </head>
 <body >
 <div align="center" style="padding-top: 20px;" >
-		<form action="login" method="post" onsubmit="return checkForm()">
+		<form action="userCenter?action=login" method="post" onsubmit="return checkForm()">
             <input name="identity" value="student" type="hidden">
 		<table  width="1004" height="584" background="image/login.jpg" >
 			<tr height="200">

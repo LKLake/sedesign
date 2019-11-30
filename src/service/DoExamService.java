@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 public interface DoExamService {
-    public void saveExam(ExamModel examModel,Map<Integer,String> currentAnswer);
+    public void saveExam(ExamModel examModel);
     public int calcuResult(Paper paper,Map<Integer,String > currentAnswer) ;
-    public List<ExamModel> findAvailablePaper(String userId);
+    public List<Paper> findAvailablePaper(String userId);
     public Paper getPaperCotent(int paprId);
 }
