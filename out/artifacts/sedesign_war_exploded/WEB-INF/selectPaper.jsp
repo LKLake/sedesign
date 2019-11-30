@@ -12,7 +12,7 @@
 </script>
 <div class="data_list">
 	<div class="data_content">
-		<form action="getPaperContent" method="post" onsubmit="return checkForm()">
+		<form action="doExam?action=getPaperContent" method="post" onsubmit="return checkForm()">
 			<table width="40%" align="center">
 				<tr>
 					<td><label><strong>请选择作业测试卷：</strong></label></td>

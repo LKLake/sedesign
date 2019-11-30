@@ -1,9 +1,8 @@
 package service;
 
 import bean.UserBean;
+import model.UserModel;
 
 public interface LoginService {
-    public Boolean userLogin(String userId, String password,String identity);
-    public String getUserId();
-    public String getUserName();
+    public UserModel userLogin(String userId, String password, String identity);
 }

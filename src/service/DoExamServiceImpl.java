@@ -4,6 +4,7 @@ import bean.ExamBean;
 import dao.exam.ExamDao;
 
 import model.ExamModel;
+import model.Paper;
 import model.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,7 +14,27 @@ import java.util.*;
 
 @Service("doExamService")
 public class DoExamServiceImpl implements DoExamService {
+    @Autowired
+    @Qualifier("ExamDao")
+    private ExamDao examDao;
+
+    @Override
+    public List<Question> getPaper(String userId) throws Exception {
+        return null;
+    }
+
+    @Override
+    public void saveExam() {
+
+    }
+
+    @Override
+    public int calcuResult(Map<String, String[]> keyMap) throws Exception {
+        return 0;
+    }
+
     public List<ExamModel> findAvailablePaper(String userId){
+        //TODO implement
         ArrayList<ExamModel>examModelList=new ArrayList<ExamModel>();
         ExamModel tmp=new ExamModel();
         tmp.setName("第一次测试卷");
@@ -21,20 +42,28 @@ public class DoExamServiceImpl implements DoExamService {
         tmp.setAddedTime("2019-10-10 10-10-10");
         examModelList.add(tmp);
         return examModelList;
-        //TODO implement
-    }
-    /*@Autowired
-    @Qualifier("ExamDao")
-    private ExamDao examDao;
-    public List<Question> getPaper(String userId) throws Exception {
-        List<ExamBean> examEntityList= examDao.getExamByUserId(userId);
-    }
-    public void onSubmit_exam(){
 
     }
 
     @Override
-    public int getResult(Map<String, String[]> keyMap) throws Exception {
+    public Paper getPaperCotent(int paprId) {
+        //TODO implement
+        Paper paper=new Paper();
+        paper.setId(1);
+        paper.setJoinDate(new Date());
+        paper.setPaperName("第一次测试卷假");
+        ArrayList<Question> singleQuestion=new ArrayList<>();
+        Question a=new Question(1,"题目内容","1",new Date(),"AA","BB","CC","DD","A");
+        singleQuestion.add(a);
+        paper.setMultiQuestionList(singleQuestion);
+        paper.setSingleQuestionList(singleQuestion);
+        return paper;
+    }
+
+
+
+    /*@Override
+    public int calcuResult(Map<String, String[]> keyMap) throws Exception {
         Iterator<Map.Entry<String, String[]>> it2 = keyMap.entrySet().iterator();
         int totalScore = 0;
         int singleScore = 0;
@@ -79,8 +108,5 @@ public class DoExamServiceImpl implements DoExamService {
         }else{
             return 0;
         }
-    }
-    public Map<String,String> findAvailablePaper(String userId){
-
     }*/
 }

@@ -3,14 +3,15 @@ package service;
 import bean.UserBean;
 import dao.DaoManager;
 import dao.user.*;
+import model.UserModel;
 import org.springframework.stereotype.Service;
 
 @Service("loginService")
 public class LoginServiceImpl implements LoginService
 {
-    private UserBean CurrentUser=null;
-    public Boolean userLogin(String userId, String password,String identity)
+    public UserModel userLogin(String userId, String password, String identity)
     {
+        UserBean currentUser=null;
         DaoManager dm = DaoManager.getInstance();
         UserDao userDao;
         if("student".equals(identity)){
@@ -20,12 +21,12 @@ public class LoginServiceImpl implements LoginService
             userDao = dm.getDao(TeacherDao.class);
         }
         else{
-            return false;
+            return null;
         }
         try
         {
             dm.begin();
-            CurrentUser = userDao.getUserByUserIdAndPassword(userId,password);
+            currentUser = userDao.getUserByUserIdAndPassword(userId,password);
             dm.commit();
         }
         catch (Exception e)
@@ -36,19 +37,8 @@ public class LoginServiceImpl implements LoginService
         {
             dm.end();
         }
-        return CurrentUser!=null;
+        UserModel userModel=new UserModel(currentUser.getUserId(),currentUser.getName());
+        return userModel;
     }
-    public String getUserName(){
-        if(this.CurrentUser!=null){
-            return CurrentUser.getName();
-        }
-        else return null;
-    }
-    public String getUserId(){
-        if(this.CurrentUser!=null){
-            return CurrentUser.getUserId();
-        }
-        else
-            return null;
-    }
+
 }

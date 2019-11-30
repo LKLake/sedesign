@@ -46,11 +46,11 @@
     </div>
     <div class="data_content">
         <strong><big>一，单选题</big></strong>（每题20分，答错不得分）<br/><br/>
-        <form id="myForm" action="doExam" method="post">
+        <form id="myForm" action="doExam?action=submit" method="post">
             <input type="hidden" name="submit_exam">
-            <input type="hidden" name="exam.paper.id" value="${paper.id }"/>
-            <c:forEach var="s" items="${paper.squestionList }" varStatus="status">
-                <strong>[&nbsp;${status.index+1}&nbsp;]&nbsp;${s.subject }</strong><br/><br/>
+<%--            <input type="hidden" name="exam.paper.id" value="${paper.id }"/>--%>
+            <c:forEach var="s" items="${paper.singleQuestionList }" varStatus="status">
+                <strong>[&nbsp;${status.index+1}&nbsp;]&nbsp;${s.content }</strong><br/><br/>
                 <label class="radio">
                     <input type="radio" name="id-r-${s.id }"  value="A">
                         ${s.optionA }
@@ -70,8 +70,8 @@
                 <br/>
             </c:forEach>
             <strong><big>二，多选题</big></strong>（每题30分，答错不得分）<br/><br/>
-            <c:forEach var="m" items="${paper.mquestionList }" varStatus="status">
-                <strong>[&nbsp;${status.index+1}&nbsp;]&nbsp;${m.subject }</strong><br/><br/>
+            <c:forEach var="m" items="${paper.multiQuestionList }" varStatus="status">
+                <strong>[&nbsp;${status.index+1}&nbsp;]&nbsp;${m.content }</strong><br/><br/>
                 <label class="checkbox">
                     <input type="checkbox" name="id-c-${m.id }" value="A">
                         ${m.optionA }
