@@ -15,7 +15,7 @@
 </script>
 <div class="navbar">
   <div class="navbar-inner">
-    <a class="brand" href="${pageContext.request.contextPath}/userCenter">首页</a>
+    <a class="brand" href="${pageContext.request.contextPath}/home">首页</a>
     <ul class="nav">
     	<c:choose>
     		<c:when test="${ sessionScope.currentUserIdentity==\"teacher\"}">

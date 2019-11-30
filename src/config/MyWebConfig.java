@@ -1,12 +1,10 @@
 package config;
 
-import org.springframework.context.annotation.Bean;
+
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.ViewResolver;
+
 import org.springframework.web.servlet.config.annotation.*;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
 @EnableWebMvc
@@ -14,7 +12,7 @@ import org.springframework.web.servlet.view.JstlView;
 @ComponentScan("service")
 @ComponentScan("dao")
 public class MyWebConfig extends WebMvcConfigurerAdapter {
-    @Bean
+/*    @Bean
     public ViewResolver internalResourceViewResolver() {
         InternalResourceViewResolver resolver =
                 new InternalResourceViewResolver();
@@ -22,20 +20,16 @@ public class MyWebConfig extends WebMvcConfigurerAdapter {
         resolver.setPrefix("/WEB-INF/");
         resolver.setSuffix(".jsp");
         return resolver;
+    }*/
+    @Override
+    public void addInterceptors(InterceptorRegistry registry){
+        registry.addInterceptor(new LoginStateInterceptor());
     }
-
-
-    //    @Override
-//    public void configurePathMatch(PathMatchConfigurer configurer) {
-//        configurer.setUseSuffixPatternMatch(false);
-//        super.configurePathMatch(configurer);
-//    @Override
-//    public void configurePathMatch(PathMatchConfigurer configurer) {
-//        configurer.setUseSuffixPatternMatch(false);
-//        super.configurePathMatch(configurer);
-//
-//    }
-
+    @Override
+    public void configureViewResolvers(ViewResolverRegistry registry) {
+        registry.jsp("/WEB-INF/", ".jsp");
+        //registry.enableContentNegotiation(new MappingJackson2JsonView());
+    }
     @Override
     public void addViewControllers(ViewControllerRegistry registry){
 
