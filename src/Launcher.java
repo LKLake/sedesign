@@ -18,7 +18,6 @@ public class Launcher extends HttpServlet
 
 		try
 		{
-            System.out.println("hahaha");
 			log.info("启动系统...");
 
 			Context context = new javax.naming.InitialContext();

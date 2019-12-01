@@ -19,7 +19,7 @@
     <ul class="nav">
     	<c:choose>
     		<c:when test="${ sessionScope.currentUserIdentity==\"teacher\"}">
-    			<li><a href="${pageContext.request.contextPath}/student!list">学生信息管理</a></li>
+    			<li><a href="${pageContext.request.contextPath}/classInfo?action=getStudent">学生信息管理</a></li>
     			<li><a href="${pageContext.request.contextPath}/exam!examList">学生成绩查询</a></li>
     			<li><a href="${pageContext.request.contextPath}/paper!paperList">作业管理</a></li>
     			<li><a href="${pageContext.request.contextPath}/question!list">题目管理</a></li>

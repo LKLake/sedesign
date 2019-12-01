@@ -34,6 +34,7 @@ public class MyWebConfig extends WebMvcConfigurerAdapter {
     public void addViewControllers(ViewControllerRegistry registry){
 
         registry.addViewController("/home").setViewName("main");
+        registry.addViewController("/classInfoManage").setViewName("studentList");
         super.addViewControllers(registry);
     }
     @Override

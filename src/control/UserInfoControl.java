@@ -6,6 +6,7 @@ import model.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.context.annotation.SessionScope;
@@ -29,11 +30,13 @@ public class UserInfoControl {
 
     private UserModel userModel;
     @RequestMapping(params = "action=login")
-    public String onLogin(String userId, String password, HttpSession session,String identity) {
+    public String onLogin(String userId, String password, HttpSession session, String identity, Model model) {
         this.userModel=loginService.userLogin(userId, password,identity);
-        System.out.println(session);
-        if(userModel==null )
+        if(userModel==null ){
+            model.addAttribute("loginState","用户名或密码错误");
             return "../login";
+        }
+
         else {
             if("student".equals(identity)){
                 StudentModel student = new StudentModel(userModel.getUserId(),userModel.getName());

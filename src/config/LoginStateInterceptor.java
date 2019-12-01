@@ -8,14 +8,12 @@ import javax.servlet.http.HttpServletResponse;
 
 public class LoginStateInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws  Exception{
-        System.out.println(request.getRequestURI());
         if (request.getRequestURI().equals("/sedesign_war_exploded/userCenter")&&
                 "login".equals(request.getParameter("action"))){
             return true;
         }
         Object obj = request.getSession().getAttribute("currentUser");
         if (obj == null){
-            System.out.println("obj==null");
             response.sendRedirect("/sedesign_war_exploded/userCenter?action=login");
             return  false;
         }

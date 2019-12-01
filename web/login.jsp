@@ -36,7 +36,7 @@
 <body >
 <div align="center" style="padding-top: 20px;" >
 		<form action="userCenter?action=login" method="post" onsubmit="return checkForm()">
-            <input name="identity" value="student" type="hidden">
+            <input name="identity" value="teacher" type="hidden">
 		<table  width="1004" height="584" background="image/login.jpg" >
 			<tr height="200">
 				<td colspan="4"></td>
@@ -44,13 +44,15 @@
 			<tr height="10">
 				<td width="68%"></td>
 				<td width="10%"><label>学号：</label></td>
-				<td><input type="text" id="id" name="userId" value="${identity}"/></td>
+<%--				<td><input type="text" id="id" name="userId" value="${currentUser.userId}"/></td>--%>
+                <td><input type="text" id="id" name="userId" value="${loginState}"/></td>
 				<td width="30%"></td>
 			</tr>
 			<tr height="10">
 				<td width="40%"></td>
 				<td width="10%"><label>密码：</label></td>
-				<td><input type="password" id="password" name="password"/></td>
+<%--				<td><input type="password" id="password" name="password"/></td>--%>
+                <td><input type="password" id="password" name="password" value=""/></td>
 				<td width="30%"></td>
 			</tr>
 
@@ -69,7 +71,6 @@
 </body>
 </html>
 <script type="text/javascript">
-	if('${error}'!=''){
-		alert('${error}');
-	}
+	document.getElementById("id").focus();
+    document.getElementById("id").select();
 </script>
