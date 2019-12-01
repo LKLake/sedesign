@@ -45,14 +45,15 @@
 				<td width="68%"></td>
 				<td width="10%"><label>学号：</label></td>
 <%--				<td><input type="text" id="id" name="userId" value="${currentUser.userId}"/></td>--%>
-                <td><input type="text" id="id" name="userId" value="${loginState}"/></td>
+<%--                <td><input type="text" id="id" name="userId" value="${loginState}"/></td>--%>
+                <td><input type="text" id="id" name="userId" value="201714"/></td>
 				<td width="30%"></td>
 			</tr>
 			<tr height="10">
 				<td width="40%"></td>
 				<td width="10%"><label>密码：</label></td>
 <%--				<td><input type="password" id="password" name="password"/></td>--%>
-                <td><input type="password" id="password" name="password" value=""/></td>
+                <td><input type="password" id="password" name="password" value="password"/></td>
 				<td width="30%"></td>
 			</tr>
 

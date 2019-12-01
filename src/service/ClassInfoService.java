@@ -7,5 +7,6 @@ import java.util.Map;
 
 public interface ClassInfoService {
     public ArrayList<StudentModel> getStudent(String teacherId);
-    public int changeStudentInfo(StudentModel studentModel);
+    public int changeStudentInfo(String userId,String name,String sex,String password,String major,String classNo);
+    public int deleteStudentInfo(String userId,String name);
 }

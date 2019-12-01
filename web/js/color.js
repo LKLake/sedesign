@@ -1,0 +1,24 @@
+function color(table,name_list,pattern_list) {
+    var cell_name=table.rows[0];
+    var cell_id=[];
+    var result_row=[];
+    for (var name_i in name_list){
+        for(var cell_i=0;cell_i< cell_name.cells.length;cell_i++){
+            if(name_list[name_i]===cell_name.cells[cell_i].id){
+
+                cell_id[name_i]=cell_i;
+                break;
+            }
+        }
+    }
+    for(var i in pattern_list){
+        for(var j=0;j< table.rows.length;j++){
+            if(table.rows[j].cells[cell_id[i]].innerText===pattern_list[i]){
+                result_row.push(j);
+            }
+        }
+    }
+    for(var i=0;i<result_row.length;i++){
+        table.rows[result_row[i]].bgColor="green";
+    }
+}

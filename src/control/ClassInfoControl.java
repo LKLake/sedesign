@@ -28,7 +28,7 @@ public class ClassInfoControl {
     @Qualifier("classInfoService")
     ClassInfoService classInfoService;
     TeacherModel teacher=null;
-    @RequestMapping(params = "action=getStudent")
+    @RequestMapping(params = "action=listStudentInfo")
     public String onFindStudent(HttpSession session, Model model){
         String userIdentity=(String) session.getAttribute("currentUserIdentity");
         if("teacher".equals(userIdentity)){
@@ -48,10 +48,20 @@ public class ClassInfoControl {
         String sex=(String) a.get("sex");
         String major=(String) a.get("major");
         String classNo=(String) a.get("classNo");
-        StudentModel studentModel=new StudentModel(userId,name,sex,password,major,classNo,null);
-        if(0==classInfoService.changeStudentInfo(studentModel))
+        if(0==classInfoService.changeStudentInfo(userId,name,sex,password,major,classNo))
             return "modefied_success";
         else
             return "modefied_faliled";
+    }
+    @RequestMapping(params = "action=deleteStudentInfo")
+    @ResponseBody
+    public String onDeleteStudentInfo(@RequestBody String str){
+        JSONObject a=new JSONObject(str);
+        String userId=(String) a.get("userId");
+        String name=(String) a.get("name");
+        if(0==classInfoService.deleteStudentInfo(userId,name))
+            return "delete_success";
+        else
+            return "delete_faliled";
     }
 }

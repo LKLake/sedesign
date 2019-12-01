@@ -23,8 +23,12 @@ public class ClassInfoServiceImpl implements ClassInfoService {
         tmp2.add(tmp);
         return tmp2;
     }
-    public int changeStudentInfo(StudentModel studentModel){
+    public int changeStudentInfo(String userId,String name,String sex,String password,String major,String classNo){
         return 0;//表示修改成功
+        //TODO implement
+    }
+    public int deleteStudentInfo(String userId,String name){
+        return 0;
         //TODO implement
     }
 }
