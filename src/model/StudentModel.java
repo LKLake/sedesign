@@ -6,6 +6,7 @@ public class StudentModel extends UserModel {
     private String major;
     private String classNo;
     private LessonInfoModel lessonInfo;
+    public StudentModel(){}
     public StudentModel(String id, String name){
         super(id,name);
     }

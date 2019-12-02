@@ -16,6 +16,7 @@ import org.springframework.web.context.annotation.SessionScope;
 import service.ClassInfoService;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
 import org.json.*;
@@ -64,4 +65,16 @@ public class ClassInfoControl {
         else
             return "delete_faliled";
     }
+    @RequestMapping(params = "action=addStudent")
+    public String onAddStudent(StudentModel studentModel, Model model){
+        if(0==classInfoService.addStudentInfo(studentModel)){
+            model.addAttribute("state","添加成功");
+            return "studentSave";
+        }
+        else{
+            model.addAttribute("state","添加失败");
+            return "studentSave";
+        }
+    }
+
 }

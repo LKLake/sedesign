@@ -6,8 +6,10 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 public class LoginStateInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws  Exception{
+
         if (request.getRequestURI().equals("/sedesign_war_exploded/userCenter")&&
                 "login".equals(request.getParameter("action"))){
             return true;

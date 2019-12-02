@@ -6,22 +6,6 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/no_empty.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/bootstrap/js/jQuery.js"></script>
 <script type="text/javascript">
-    var changed_tr=[];
-	function studentDelete(studentId){
-		if(confirm("确定要删除这条记录吗?")){
-			$.post("student!deleteStudent",{id:studentId},
-				function(result){
-					var result = eval('('+result+')');
-					if(result.error){
-						alert(result.error);
-					}else{
-						alert("删除成功！");
-						window.location.href="${pageContext.request.contextPath}/student!list";
-					}
-				}
-			);
-		}
-	}
 	function try_to_change(target){
         var tr=target.parentElement.parentElement;
         var table=tr.parentElement;
@@ -46,7 +30,7 @@
 	    var nameElem=document.getElementById("student_name");
 	    var userIdEelem=document.getElementById("student_id");
 	    var ret=no_empty([nameElem,userIdEelem]);
-	    if(ret!="success"){
+	    if(ret!=="success"){
 	        alert(ret);
 	        return;
         }
@@ -91,7 +75,9 @@
                 <td><button class="btn btn-primary" style="margin-bottom: 8px;" onclick="search()" >查询</button></td>
             </tr>
         </table>
-		<button class="btn-mini btn-primary" style="float: right;margin-bottom: 5px;" type="button" onclick="javascript:window.location='student!preSave'">添加考生信息</button>
+		<button class="btn-mini btn-primary" style="float: right;margin-bottom: 5px;" type="button" onclick="window.location='studentSave'">
+            添加考生信息
+        </button>
 	</div>
 	<div class="data_content">
 		<table class="table table-bordered table-hover" id="main_table">
