@@ -1,24 +1,19 @@
 package control;
 
-import model.LessonInfoModel;
 import model.StudentModel;
 import model.TeacherModel;
-import model.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.annotation.SessionScope;
 import service.ClassInfoService;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.Map;
+
 import org.json.*;
 
 @Controller
@@ -76,5 +71,11 @@ public class ClassInfoControl {
             return "studentSave";
         }
     }
-
+    @RequestMapping(params = "action=getStudentScore")
+    public String onGetStudentScore(HttpSession session,Model model){
+        TeacherModel currentUser=(TeacherModel)session.getAttribute("currentUser");
+        model.addAttribute("paperList",classInfoService.getClassPaper(currentUser.getUserId()));
+        model.addAttribute("studentList",classInfoService.getAllStudent(currentUser.getUserId()));
+        return "studentScore";
+    }
 }

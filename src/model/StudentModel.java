@@ -2,10 +2,12 @@ package model;
 
 import service.LessonInfoService;
 
+import java.util.ArrayList;
+
 public class StudentModel extends UserModel {
     private String major;
     private String classNo;
-    private LessonInfoModel lessonInfo;
+    private ArrayList<LessonInfoModel> lessonInfoList;
     public StudentModel(){}
     public StudentModel(String id, String name){
         super(id,name);
@@ -13,11 +15,11 @@ public class StudentModel extends UserModel {
 
 
 
-    public StudentModel(String userId,String name,String sex,String password,String major,String classNo,LessonInfoModel lessonInfo){
+    public StudentModel(String userId,String name,String sex,String password,String major,String classNo,ArrayList<LessonInfoModel> lessonInfoList){
         super(userId,name,sex,password);
         this.major=major;
         this.classNo=classNo;
-        this.lessonInfo=lessonInfo;
+        this.lessonInfoList=lessonInfoList;
     }
 
     public String getMajor() {
@@ -36,11 +38,11 @@ public class StudentModel extends UserModel {
         this.classNo = classNo;
     }
 
-    public LessonInfoModel getLessonInfo() {
-        return lessonInfo;
+    public ArrayList<LessonInfoModel> getLessonInfoList() {
+        return lessonInfoList;
     }
 
-    public void setLessonInfo(LessonInfoModel lessonInfo) {
-        this.lessonInfo = lessonInfo;
+    public void setLessonInfoList(ArrayList<LessonInfoModel> lessonInfoList) {
+        this.lessonInfoList = lessonInfoList;
     }
 }

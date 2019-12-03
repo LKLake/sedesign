@@ -1,9 +1,10 @@
 package service;
 
-import model.ExamModel;
+
+import model.LessonInfoModel;
 
 import java.util.ArrayList;
 
 public interface LessonInfoService {
-    public ArrayList<ExamModel> getAllExam(String userId);
+    public ArrayList<LessonInfoModel> getAllExam(String userId);
 }

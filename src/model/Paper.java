@@ -18,6 +18,12 @@ public class Paper {
     private ArrayList<Question> singleQuestionList=new ArrayList<>();
     private ArrayList<Question> multiQuestionList=new ArrayList<>();
     public Paper(){}
+
+    public Paper(int id, String paperName) {
+        this.id=id;
+        this.paperName=paperName;
+    }
+
     public void addSingleQuestion(Question question){
         this.singleQuestionList.add(question);
     }

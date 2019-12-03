@@ -2,13 +2,14 @@ package service;
 
 
 import dao.user.StudentDao;
+import model.LessonInfoModel;
+import model.Paper;
 import model.StudentModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 @Service("classInfoService")
 public class ClassInfoServiceImpl implements ClassInfoService {
@@ -43,5 +44,21 @@ public class ClassInfoServiceImpl implements ClassInfoService {
         System.out.println("添加的学生名："+student.getName());
         return 0;
         //TODO implement
+    }
+    public ArrayList<Paper> getClassPaper(String userId){
+        //TODO implement 可以只填写paper.id和paper.name
+        ArrayList<Paper >tmp=new ArrayList<>();
+        tmp.add(new Paper(1,"第一次测试卷"));
+        return tmp;
+    }
+    public ArrayList<StudentModel> getAllStudent(String userId){
+        //TODO implement
+        LessonInfoModel tmp=new LessonInfoModel(new Paper(1,"第一次测试卷"),null,97,50,47);
+        ArrayList<LessonInfoModel> tmp2=new ArrayList<LessonInfoModel>();
+        tmp2.add(tmp);
+        ArrayList<StudentModel> a=new ArrayList<>();
+        StudentModel tmp3=new StudentModel("201714","lklake",null,null,null,null,tmp2);
+        a.add(tmp3);
+        return a;
     }
 }

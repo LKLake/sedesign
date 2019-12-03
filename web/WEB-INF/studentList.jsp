@@ -4,7 +4,10 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/request.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/color.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/no_empty.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/bootstrap/js/jQuery.js"></script>
+<link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+<script src="${pageContext.request.contextPath}/bootstrap/js/jQuery.js"></script>
+<script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.js"></script>
 <script type="text/javascript">
 	function try_to_change(target){
         var tr=target.parentElement.parentElement;
@@ -35,7 +38,7 @@
 	        return;
         }
         var table=document.getElementById("main_table");
-	    color(table,["userId","name"],[userIdEelem.value,nameElem.value]);
+	    color(table,["userId","name"],[userIdEelem.value,nameElem.value],"red","origin");
     }
     function try_to_delete(target){
         var tr=target.parentElement.parentElement;

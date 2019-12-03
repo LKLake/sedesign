@@ -1,9 +1,8 @@
 package service;
 
-import bean.ExamBean;
 import dao.exam.ExamDao;
 
-import model.ExamModel;
+import model.LessonInfoModel;
 import model.Paper;
 import model.Question;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +41,7 @@ public class DoExamServiceImpl implements DoExamService {
         paper.setSingleQuestionList(singleQuestion);
         return paper;
     }
-    public void saveExam(ExamModel examModel){
+    public void saveExam(LessonInfoModel lessonInfoModel){
         return;
         //TODO implement
     }

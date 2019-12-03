@@ -1,13 +1,16 @@
 package service;
 
+import model.LessonInfoModel;
+import model.Paper;
 import model.StudentModel;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 public interface ClassInfoService {
     public ArrayList<StudentModel> getStudent(String teacherId);
     public int changeStudentInfo(String userId,String name,String sex,String password,String major,String classNo);
     public int deleteStudentInfo(String userId,String name);
     public int addStudentInfo(StudentModel student);
+    public ArrayList<Paper> getClassPaper(String userId);
+    public ArrayList<StudentModel> getAllStudent(String userId);
 }

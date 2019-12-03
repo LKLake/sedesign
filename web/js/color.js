@@ -1,4 +1,4 @@
-function color(table,name_list,pattern_list) {
+function color(table,name_list,pattern_list,hit_color,miss_color) {
     var cell_name=table.rows[0];
     var cell_id=[];
     var result_row=[];
@@ -18,7 +18,15 @@ function color(table,name_list,pattern_list) {
             }
         }
     }
-    for(var i=0;i<result_row.length;i++){
-        table.rows[result_row[i]].bgColor="green";
+    // for(var i=0;i<result_row.length;i++){
+    //     table.rows[result_row[i]].bgColor="green";
+    // }
+    for(var i=0;i<table.rows.length;i++){
+        if(result_row.indexOf(i)!==-1)
+            table.rows[i].bgColor=hit_color;
+        else {
+            if (miss_color !== "origin")
+                table.rows[i].bgColor = miss_color;
+        }
     }
 }
