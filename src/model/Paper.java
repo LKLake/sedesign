@@ -12,16 +12,17 @@ import java.util.Set;
  *
  */
 public class Paper {
-    private int id;
     private String paperName;
     private Date joinDate;
-    private ArrayList<Question> singleQuestionList=new ArrayList<>();
-    private ArrayList<Question> multiQuestionList=new ArrayList<>();
-    public Paper(){}
+    private ArrayList<Question> singleQuestionList;
+    private ArrayList<Question> multiQuestionList;
 
-    public Paper(int id, String paperName) {
-        this.id=id;
+    public Paper(){}
+    public Paper(String paperName,Date joinDate,ArrayList<Question> singleQuestionList,ArrayList<Question> multiQuestionList) {
         this.paperName=paperName;
+        this.joinDate=joinDate;
+        this.singleQuestionList=singleQuestionList;
+        this.multiQuestionList=multiQuestionList;
     }
 
     public void addSingleQuestion(Question question){
@@ -29,13 +30,6 @@ public class Paper {
     }
     public void addMultiQuestion(Question question){
         this.multiQuestionList.add(question);
-    }
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getPaperName() {

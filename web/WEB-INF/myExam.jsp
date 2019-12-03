@@ -19,14 +19,14 @@
 				<th>多选题得分</th>
 				<th>总分</th>
 			</tr>
-			<c:forEach var="exam" items="${examList}" varStatus="status" >
+			<c:forEach var="lessonInfo" items="${lessonInfoList}" varStatus="status" >
 				<tr>
 					<td>${status.index+1 }</td>
-					<td>${exam.paper.paperName }</td>
-					<td><fmt:formatDate value="${exam.addedTime }" type="date" pattern="yyyy-MM-dd"/></td>
-					<td>${exam.singleScore }</td>
-					<td>${exam.multiScore }</td>
-					<td><font color="red">${exam.score }</font></td>
+					<td>${lessonInfo.paper.paperName }</td>
+					<td><fmt:formatDate value="${lessonInfo.addedTime }" type="date" pattern="yyyy-MM-dd"/></td>
+					<td>${lessonInfo.singleScore }</td>
+					<td>${lessonInfo.multiScore }</td>
+					<td><font color="red">${lessonInfo.singleScore+lessonInfo.multiScore }</font></td>
 				</tr>
 			</c:forEach>
 	  </table>

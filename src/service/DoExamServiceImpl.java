@@ -18,36 +18,41 @@ public class DoExamServiceImpl implements DoExamService {
     private ExamDao examDao;
 
 
-    public List<Paper> findAvailablePaper(String userId){
-        ArrayList<Paper>paperList=new ArrayList<Paper>();
-        Paper tmp1=new Paper();
-        tmp1.setPaperName("第一次测试卷");
-        paperList.add(tmp1);
+    public List<AbstractMap.SimpleEntry<Integer,String>> findAvailablePaper(String userId){
+        ArrayList<AbstractMap.SimpleEntry<Integer,String>>paperList= new ArrayList<>();
+        AbstractMap.SimpleEntry<Integer,String> a=new AbstractMap.SimpleEntry<>(1,"第一次测试卷");
+        paperList.add(a);
         return paperList;
         //TODO implement
+        //输入userId，从student表找到classno，查paper表找到所有paper，将paperid和名字组合为simpleentry，放入arraylist返回
+
     }
 
     @Override
-    public Paper getPaperCotent(int paprId) {
+    public Paper getPaperCotent(int paperId) {
         //TODO implement
+        //输入paperId,从question表返回题目，要把题目分为单选多选，生成paper返回。
         Paper paper=new Paper();
-        paper.setId(1);
         paper.setJoinDate(new Date());
         paper.setPaperName("第一次测试卷假");
         ArrayList<Question> singleQuestion=new ArrayList<>();
-        Question a=new Question(1,"题目内容","1",new Date(),"AA","BB","CC","DD","A");
+        Question a=new Question(1,"题目内容",1,new Date(),"AA","BB","CC","DD","A");
         singleQuestion.add(a);
         paper.setMultiQuestionList(singleQuestion);
         paper.setSingleQuestionList(singleQuestion);
         return paper;
     }
-    public void saveExam(LessonInfoModel lessonInfoModel){
+    public void saveLessonInfo(LessonInfoModel lessonInfoModel){
         return;
         //TODO implement
     }
-    public int calcuResult(Paper paper,Map<Integer,String > currentAnswer){
-        return 98;
+    public ArrayList<Integer> calcuResult(Paper paper,Map<Integer,String > currentAnswer){
+        ArrayList<Integer>tmp=new ArrayList<>();
+        tmp.add(40);
+        tmp.add(50);
+        return tmp;
         //TODO implement
+        //currentAnswer为题号和答案的map，计算paper里单选和多选的成绩，依次存入arraylist返回。
     };
 
 

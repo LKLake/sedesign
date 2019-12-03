@@ -21,8 +21,8 @@
     		<c:when test="${ sessionScope.currentUserIdentity==\"teacher\"}">
     			<li><a href="${pageContext.request.contextPath}/classInfo?action=listStudentInfo">学生信息管理</a></li>
     			<li><a href="${pageContext.request.contextPath}/classInfo?action=getStudentScore">学生成绩查询</a></li>
-    			<li><a href="${pageContext.request.contextPath}/paper!paperList">作业管理</a></li>
-    			<li><a href="${pageContext.request.contextPath}/question!list">题目管理</a></li>
+    			<li><a href="${pageContext.request.contextPath}/makePaper">制作试卷</a></li>
+<%--    			<li><a href="${pageContext.request.contextPath}/question!list">题库管理</a></li>--%>
     			<%-- <li><a href="${pageContext.request.contextPath}/appointment!appointmentList">预约查询</a></li> --%>
     			<li><a href="javascript:logout()">退出系统</a></li>
     		</c:when>

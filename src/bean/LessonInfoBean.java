@@ -1,21 +1,20 @@
 package bean;
 
 
-public class ExamBean {
-    private String id;
+public class LessonInfoBean {
+    private int id;
     private String exam_date;
     private int multi_score;
     private int single_score;
-    private int score;
     private int paper_id;
     private String student_id;
 
-    public ExamBean(){}
-    public String getId() {
+    public LessonInfoBean(){}
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -41,14 +40,6 @@ public class ExamBean {
 
     public void setSingle_score(int single_score) {
         this.single_score = single_score;
-    }
-
-    public int getScore() {
-        return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
     }
 
     public int getPaper_id() {

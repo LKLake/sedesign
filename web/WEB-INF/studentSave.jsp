@@ -15,6 +15,7 @@
 		if(name==null||name===""){
 			$("#error").html("姓名不能为空！");
 			return false;
+
 		}
 		if(sex==null||sex===""){
 			$("#error").html("请选择性别！");

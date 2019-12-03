@@ -6,16 +6,10 @@ import java.util.ArrayList;
 
 public class StudentModel extends UserModel {
     private String major;
-    private String classNo;
+    private int classNo;
     private ArrayList<LessonInfoModel> lessonInfoList;
     public StudentModel(){}
-    public StudentModel(String id, String name){
-        super(id,name);
-    }
-
-
-
-    public StudentModel(String userId,String name,String sex,String password,String major,String classNo,ArrayList<LessonInfoModel> lessonInfoList){
+    public StudentModel(String userId, String name,String sex,String password,String major,int classNo,ArrayList<LessonInfoModel> lessonInfoList){
         super(userId,name,sex,password);
         this.major=major;
         this.classNo=classNo;
@@ -30,11 +24,11 @@ public class StudentModel extends UserModel {
         this.major = major;
     }
 
-    public String getClassNo() {
+    public int getClassNo() {
         return classNo;
     }
 
-    public void setClassNo(String classNo) {
+    public void setClassNo(int classNo) {
         this.classNo = classNo;
     }
 

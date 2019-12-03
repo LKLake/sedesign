@@ -6,10 +6,10 @@ public class UserModel {
     private String sex;
     private String password;
     public UserModel(){}
-    public UserModel(String userId,String name){
-        this.name=name;
-        this.userId=userId;
-    }
+//    public UserModel(String userId,String name){
+//        this.name=name;
+//        this.userId=userId;
+//    }
     public UserModel(String userId,String name,String sex,String password){
         this.userId=userId;
         this.name=name;

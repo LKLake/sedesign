@@ -1,5 +1,6 @@
 package control;
 
+import model.ClassInfoModel;
 import model.StudentModel;
 import model.TeacherModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +30,8 @@ public class ClassInfoControl {
         String userIdentity=(String) session.getAttribute("currentUserIdentity");
         if("teacher".equals(userIdentity)){
             this.teacher=(TeacherModel) session.getAttribute("currentUser");
-            teacher.setStudentModelList(classInfoService.getStudent(teacher.getUserId()));
-            model.addAttribute("studentList",teacher.getStudentModelList());
+            teacher.setClassInfo(new ClassInfoModel(classInfoService.getStudent(teacher.getUserId()),null,-1));
+            model.addAttribute("studentList",teacher.getClassInfo().getStudentModelList());
         }
         return "studentList";
     }

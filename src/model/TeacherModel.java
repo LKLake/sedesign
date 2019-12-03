@@ -1,30 +1,19 @@
 package model;
 
-import service.ClassInfoService;
-
-import java.util.ArrayList;
 
 public class TeacherModel extends UserModel {
-    private ArrayList<StudentModel> studentModelList=null;
-    private ClassInfoModel cLassInfo;
-
-    public TeacherModel(String userId, String name){
-        super(userId,name);
+    private ClassInfoModel classInfo;
+    public TeacherModel(){}
+    public TeacherModel(String userId, String name,String sex,String password,ClassInfoModel classInfoModel){
+        super(userId,name,sex,password);
+        this.classInfo=classInfoModel;
     }
 
-    public ArrayList<StudentModel> getStudentModelList() {
-        return studentModelList;
+    public ClassInfoModel getClassInfo() {
+        return classInfo;
     }
 
-    public void setStudentModelList(ArrayList<StudentModel> studentModelList) {
-        this.studentModelList = studentModelList;
-    }
-
-    public ClassInfoModel getcLassInfo() {
-        return cLassInfo;
-    }
-
-    public void setcLassInfo(ClassInfoModel cLassInfo) {
-        this.cLassInfo = cLassInfo;
+    public void setClassInfo(ClassInfoModel classInfo) {
+        this.classInfo = classInfo;
     }
 }

@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/request.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/color.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/hit_table.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/no_empty.js"></script>
 <link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
@@ -38,7 +38,7 @@
 	        return;
         }
         var table=document.getElementById("main_table");
-	    color(table,["userId","name"],[userIdEelem.value,nameElem.value],"red","origin");
+	    hit_table(table,["userId","name"],[userIdEelem.value,nameElem.value],"background-color:green","display:none","reset_first");
     }
     function try_to_delete(target){
         var tr=target.parentElement.parentElement;
@@ -76,6 +76,7 @@
                 <td><input type="text" id="student_name" /></td>
                 <td>&nbsp;</td>
                 <td><button class="btn btn-primary" style="margin-bottom: 8px;" onclick="search()" >查询</button></td>
+                <td><button class="btn btn-primary" style="margin-bottom: 8px;" type="submit" onclick="location.reload()">重置</button></td>
             </tr>
         </table>
 		<button class="btn-mini btn-primary" style="float: right;margin-bottom: 5px;" type="button" onclick="window.location='studentSave'">
@@ -129,7 +130,7 @@
                     txt.focus();
                     txt.onblur=function (ev) {
                         var target=ev.target;
-                        var parent=target.parentElement
+                        var parent=target.parentElement;
                         parent.innerText=target.value;
                         changed_tr.push(parent.parentElement);
                     }

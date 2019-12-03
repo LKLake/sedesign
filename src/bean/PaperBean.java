@@ -1,18 +1,13 @@
 package bean;
 
 public class PaperBean {
-    private String id;
+
+    private int class_no;
     private String join_date;
     private String paper_name;
 
     public PaperBean(){}
-    public String getId() {
-        return id;
-    }
 
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getJoin_date() {
         return join_date;
@@ -28,5 +23,13 @@ public class PaperBean {
 
     public void setPaper_name(String paper_name) {
         this.paper_name = paper_name;
+    }
+
+    public int getClass_no() {
+        return class_no;
+    }
+
+    public void setClass_no(int class_no) {
+        this.class_no = class_no;
     }
 }

@@ -39,7 +39,7 @@ public class LoginServiceImpl implements LoginService
         }
         if(currentUser==null)
             return null;
-        UserModel userModel=new UserModel(currentUser.getUserId(),currentUser.getName());
+        UserModel userModel=new UserModel(currentUser.getUserId(),currentUser.getName(),null,null);
         return userModel;
     }
 

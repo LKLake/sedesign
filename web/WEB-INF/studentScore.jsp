@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/color.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/hit_table.js"></script>
 <link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 <script src="${pageContext.request.contextPath}/bootstrap/js/jQuery.js"></script>
@@ -9,14 +9,14 @@
 <script>
     function on_change_paper(){
 
-        window.location.reload();
 
         var selected_item=document.getElementById("paperName");
         var selected_name=selected_item.options[selected_item.selectedIndex].innerText;
         var student_id=document.getElementById("studentId").value;
         var student_name=document.getElementById("studentName").value;
         var table=document.getElementById("main_table");
-        color(table,["rowPaperName","rowStudentId","rowStudentName"],[selected_name,student_id,student_name],"red","origin")
+        hit_table(table,["rowPaperName","rowStudentId","rowStudentName"],[selected_name,student_id,student_name],
+            "background-color:green","display:none","reset_first")
     }
 </script>
 <div class="data_list">
@@ -32,7 +32,7 @@
                         <select id="paperName" name="paperName">
                             <option value="">请选择...</option>
                             <c:forEach var="paper" items="${paperList}">
-                                <option value="${paper.id}" >${paper.paperName}</option>
+                                <option value="${paper.key}" >${paper.value}</option>
                             </c:forEach>
                         </select>
                     </td>
@@ -43,6 +43,7 @@
 					<td><input type="text" id="studentName" name="s_exam.student.name"/></td>
 					<td>&nbsp;</td>
 					<td><button class="btn btn-primary" style="margin-bottom: 8px;" type="submit" onclick="on_change_paper()">查询</button></td>
+                    <td><button class="btn btn-primary" style="margin-bottom: 8px;" type="submit" onclick="location.reload()">重置</button></td>
 				</tr>
 			</table>
 	</div>
@@ -68,7 +69,7 @@
                         <td><fmt:formatDate value="${lessonInfo.addedTime }" type="date" pattern="yyyy-MM-dd"/></td>
                         <td>${lessonInfo.singleScore }</td>
                         <td>${lessonInfo.multiScore }</td>
-                        <td><font color="red">${lessonInfo.score }</font></td>
+                        <td><font color="red">${lessonInfo.singleScore+lessonInfo.multiScore }</font></td>
                     </tr>
                 </c:forEach>
 			</c:forEach>

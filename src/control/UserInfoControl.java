@@ -39,14 +39,14 @@ public class UserInfoControl {
 
         else {
             if("student".equals(identity)){
-                StudentModel student = new StudentModel(userModel.getUserId(),userModel.getName());
+                StudentModel student = new StudentModel(userModel.getUserId(),userModel.getName(),null,null,null,-1,null);
                 this.userModel=student;
                 session.setAttribute("currentUser", student);
                 session.setAttribute("currentUserIdentity","student");
                 return "main";
             }
             else{
-                TeacherModel teacher = new TeacherModel(userModel.getUserId(),userModel.getName());
+                TeacherModel teacher = new TeacherModel(userModel.getUserId(),userModel.getName(),null,null,null);
                 this.userModel=teacher;
                 session.setAttribute("currentUser", teacher);
                 session.setAttribute("currentUserIdentity","teacher");

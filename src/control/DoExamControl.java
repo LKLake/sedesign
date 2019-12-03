@@ -13,8 +13,8 @@ import service.DoExamService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.List;
-import java.util.Map;
+import java.lang.reflect.Array;
+import java.util.*;
 
 @Controller
 @SessionScope
@@ -27,17 +27,18 @@ public class DoExamControl {
     private DoExamService doExamService;
     @RequestMapping(params = "action=submit")
     public String onSubmit(HttpServletRequest request,Model model){
-        doExamService.saveExam(new LessonInfoModel(currentPaper,currentAnswer));
-        int score=doExamService.calcuResult(currentPaper,currentAnswer);
+
+        ArrayList<Integer> scoreList=doExamService.calcuResult(currentPaper,currentAnswer);
+        doExamService.saveLessonInfo(new LessonInfoModel(new Date(),currentPaper,currentAnswer,scoreList.get(0),scoreList.get(1)));
 //        Map<String, String[]> keyMap = new HashMap<String, String[]>();
 //        keyMap = request.getParameterMap();
         //TODO implement
-        model.addAttribute("score",score);
+        model.addAttribute("score",scoreList.get(0)+scoreList.get(1));
         return "examResult";
     }
     @RequestMapping(params = "action=getAvailablePaper",method = RequestMethod.GET)
     public String onGetAvailablePaper(HttpSession session, Model model){
-        List<Paper> avaliablePaperList=doExamService.findAvailablePaper(
+        List<AbstractMap.SimpleEntry<Integer,String>> avaliablePaperList=doExamService.findAvailablePaper(
                 (String) session.getAttribute("currentUserId"));
         model.addAttribute("availablePaperList",avaliablePaperList);
         return "selectPaper";

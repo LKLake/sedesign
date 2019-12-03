@@ -24,7 +24,7 @@ public class LessonInfoControl {
     public String onQueryScore(HttpSession session, Model model){
         StudentModel studentModel=(StudentModel) session.getAttribute("currentUser");
         ArrayList<LessonInfoModel>lessonInfoModelArrayList=lessonInfoService.getAllExam(studentModel.getUserId());
-        model.addAttribute("examList",lessonInfoModelArrayList);
+        model.addAttribute("lessonInfoList",lessonInfoModelArrayList);
         return "myExam";
     }
 }

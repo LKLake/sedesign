@@ -8,12 +8,10 @@ import java.util.Date;
  *
  */
 public class Question {
-
-    private int id;  // 问题编号
+    private int id;//为了识别这个题目，
     private String content; // 题目名称
-    private String type; // 题目类型 1 是单选题 2 是多选题
+    private int type; // 题目类型 0 是单选题 1 是多选题
     private Date joinTime; // 添加时间
-
 
     private String optionA; // 选项A
     private String optionB; // 选项B
@@ -22,7 +20,7 @@ public class Question {
     private String answer; // 答案
 
     public Question(){}
-    public Question(int id,String content,String type,Date joinTime,String optionA,String optionB,String optionC,String optionD,String answer){
+    public Question(int id,String content,int type,Date joinTime,String optionA,String optionB,String optionC,String optionD,String answer){
         this.id=id;
         this.content=content;
         this.type=type;
@@ -33,17 +31,19 @@ public class Question {
         this.optionD=optionD;
         this.answer=answer;
     }
+
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
 
-    public String getType() {
+    public int getType() {
         return type;
     }
-    public void setType(String type) {
+    public void setType(int type) {
         this.type = type;
     }
     public Date getJoinTime() {
