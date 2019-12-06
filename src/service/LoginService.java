@@ -1,6 +1,6 @@
 package service;
 
-import bean.UserBean;
+
 import model.UserModel;
 
 public interface LoginService {

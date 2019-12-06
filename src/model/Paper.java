@@ -16,13 +16,22 @@ public class Paper {
     private Date joinDate;
     private ArrayList<Question> singleQuestionList;
     private ArrayList<Question> multiQuestionList;
-
+    private int paperId;
     public Paper(){}
-    public Paper(String paperName,Date joinDate,ArrayList<Question> singleQuestionList,ArrayList<Question> multiQuestionList) {
+    public Paper(int paperId,String paperName,Date joinDate,ArrayList<Question> singleQuestionList,ArrayList<Question> multiQuestionList) {
+        this.paperId=paperId;
         this.paperName=paperName;
         this.joinDate=joinDate;
         this.singleQuestionList=singleQuestionList;
         this.multiQuestionList=multiQuestionList;
+    }
+
+    public int getPaperId() {
+        return paperId;
+    }
+
+    public void setPaperId(int paperId) {
+        this.paperId = paperId;
     }
 
     public void addSingleQuestion(Question question){
@@ -31,7 +40,6 @@ public class Paper {
     public void addMultiQuestion(Question question){
         this.multiQuestionList.add(question);
     }
-
     public String getPaperName() {
         return paperName;
     }
@@ -63,4 +71,5 @@ public class Paper {
     public void setMultiQuestionList(ArrayList<Question> multiQuestionList) {
         this.multiQuestionList = multiQuestionList;
     }
+
 }

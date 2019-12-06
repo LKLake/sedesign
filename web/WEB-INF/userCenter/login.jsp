@@ -6,11 +6,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link href="style/studentInfo.css" rel="stylesheet">
-<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
-<link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
-<script src="bootstrap/js/jQuery.js"></script>
-<script src="bootstrap/js/bootstrap.js"></script>
+    <link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <script src="${pageContext.request.contextPath}/bootstrap/js/jQuery.js"></script>
+    <script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.js"></script>
 <script type="text/javascript">
 	function checkForm(){
 		var id=document.getElementById("id").value;
@@ -35,34 +34,32 @@
 </script>
 </head>
 <body >
-<div align="center" style="padding-top: 20px;" >
+<div align="center" style="padding-top: 20px" >
 		<form action="userCenter?action=login" method="post" onsubmit="return checkForm()">
-            <input name="identity" value="teacher" type="hidden">
-		<table  width="1004" height="584" background="image/login.jpg" >
+		<table  width="100%" height="100%" background="${pageContext.request.contextPath}/image/login.jpg" >
 			<tr height="200">
 				<td colspan="4"></td>
 			</tr>
 			<tr height="10">
 				<td width="68%"></td>
 				<td width="10%"><label>学号：</label></td>
-<%--				<td><input type="text" id="id" name="userId" value="${currentUser.userId}"/></td>--%>
-<%--                <td><input type="text" id="id" name="userId" value="${loginState}"/></td>--%>
                 <td><input type="text" id="id" name="userId" value="201714"/></td>
 				<td width="30%"></td>
 			</tr>
 			<tr height="10">
 				<td width="40%"></td>
 				<td width="10%"><label>密码：</label></td>
-<%--				<td><input type="password" id="password" name="password"/></td>--%>
                 <td><input type="password" id="password" name="password" value="password"/></td>
 				<td width="30%"></td>
 			</tr>
 
 			<tr height="10">
-				<td width="40%"></td>
+                <td width="40%" ></td>
+
 				<td width="10%"><button class="btn btn-primary" type="submit">登录</button></td>
 				<td><button class="btn btn-primary" type="button"  onclick="resetValue()">重置</button></td>
-				<td width="30%"></td>
+                <td width="40%" ><input id="identity" name="identityFlag" value="teacher" type="checkbox">教师登录</td>
+                <td width="50%"></td>
 			</tr>
 			<tr >
 				<td></td>

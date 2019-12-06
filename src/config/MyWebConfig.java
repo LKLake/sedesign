@@ -32,11 +32,12 @@ public class MyWebConfig extends WebMvcConfigurerAdapter {
     }
     @Override
     public void addViewControllers(ViewControllerRegistry registry){
-
-        registry.addViewController("/home").setViewName("main");
-        registry.addViewController("/classInfoManage").setViewName("studentList");
-        registry.addViewController("/studentSave").setViewName("studentSave");
-        registry.addViewController("/makePaper").setViewName("makePaper");
+        registry.addViewController("/login").setViewName("userCenter/login");
+        registry.addViewController("/home").setViewName("state/main");
+        registry.addViewController("/classInfoManage").setViewName("classCenter/studentList");
+        registry.addViewController("/studentSave").setViewName("classCenter/studentSave");
+        registry.addViewController("/makeNewPaper").setViewName("classCenter/makePaper");
+        registry.addViewController("/changePassword").setViewName("userCenter/updatePassword");
         super.addViewControllers(registry);
     }
     @Override

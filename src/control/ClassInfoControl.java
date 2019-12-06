@@ -1,5 +1,6 @@
 package control;
 
+
 import model.ClassInfoModel;
 import model.StudentModel;
 import model.TeacherModel;
@@ -33,7 +34,7 @@ public class ClassInfoControl {
             teacher.setClassInfo(new ClassInfoModel(classInfoService.getStudent(teacher.getUserId()),null,-1));
             model.addAttribute("studentList",teacher.getClassInfo().getStudentModelList());
         }
-        return "studentList";
+        return "classCenter/studentList";
     }
     @RequestMapping(params = "action=changeStudentInfo")
     @ResponseBody
@@ -65,18 +66,18 @@ public class ClassInfoControl {
     public String onAddStudent(StudentModel studentModel, Model model){
         if(0==classInfoService.addStudentInfo(studentModel)){
             model.addAttribute("state","添加成功");
-            return "studentSave";
+            return "classCenter/studentSave";
         }
         else{
             model.addAttribute("state","添加失败");
-            return "studentSave";
+            return "classCenter/studentSave";
         }
     }
     @RequestMapping(params = "action=getStudentScore")
     public String onGetStudentScore(HttpSession session,Model model){
         TeacherModel currentUser=(TeacherModel)session.getAttribute("currentUser");
         model.addAttribute("paperList",classInfoService.getClassPaper(currentUser.getUserId()));
-        model.addAttribute("studentList",classInfoService.getAllStudent(currentUser.getUserId()));
-        return "studentScore";
+        model.addAttribute("studentList",classInfoService.getStudent(currentUser.getUserId()));
+        return "classCenter/studentScore";
     }
 }

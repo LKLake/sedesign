@@ -6,5 +6,5 @@ import model.LessonInfoModel;
 import java.util.ArrayList;
 
 public interface LessonInfoService {
-    public ArrayList<LessonInfoModel> getAllExam(String userId);
+    public ArrayList<LessonInfoModel> getAllExam(String userId) throws Exception;
 }

@@ -3,11 +3,11 @@ package bean;
 
 public class LessonInfoBean {
     private int id;
-    private String exam_date;
-    private int multi_score;
-    private int single_score;
-    private int paper_id;
-    private String student_id;
+    private String examDate;
+    private int multiScore;
+    private int singleScore;
+    private int paperId;
+    private String studentId;
 
     public LessonInfoBean(){}
     public int getId() {
@@ -18,43 +18,43 @@ public class LessonInfoBean {
         this.id = id;
     }
 
-    public String getExam_date() {
-        return exam_date;
+    public String getExamDate() {
+        return examDate;
     }
 
-    public void setExam_date(String exam_date) {
-        this.exam_date = exam_date;
+    public void setExamDate(String examDate) {
+        this.examDate = examDate;
     }
 
-    public int getMulti_score() {
-        return multi_score;
+    public int getMultiScore() {
+        return multiScore;
     }
 
-    public void setMulti_score(int multi_score) {
-        this.multi_score = multi_score;
+    public void setMultiScore(int multiScore) {
+        this.multiScore = multiScore;
     }
 
-    public int getSingle_score() {
-        return single_score;
+    public int getSingleScore() {
+        return singleScore;
     }
 
-    public void setSingle_score(int single_score) {
-        this.single_score = single_score;
+    public void setSingleScore(int singleScore) {
+        this.singleScore = singleScore;
     }
 
-    public int getPaper_id() {
-        return paper_id;
+    public int getPaperId() {
+        return paperId;
     }
 
-    public void setPaper_id(int paper_id) {
-        this.paper_id = paper_id;
+    public void setPaperId(int paperId) {
+        this.paperId = paperId;
     }
 
-    public String getStudent_id() {
-        return student_id;
+    public String getStudentId() {
+        return studentId;
     }
 
-    public void setStudent_id(String student_id) {
-        this.student_id = student_id;
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
     }
 }

@@ -1,17 +1,18 @@
 package bean;
 
+
 public class AnswerBean {
-    private int examId;
+    private int lessonInfoId;
     private int questionId;
     private String answer;
     public AnswerBean(){}
 
-    public int getExamId() {
-        return examId;
+    public int getLessonInfoId() {
+        return lessonInfoId;
     }
 
-    public void setExamId(int examId) {
-        this.examId = examId;
+    public void setLessonInfoId(int lessonInfoId) {
+        this.lessonInfoId = lessonInfoId;
     }
 
     public int getQuestionId() {

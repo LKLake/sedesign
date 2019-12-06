@@ -1,5 +1,6 @@
 package control;
 
+
 import model.LessonInfoModel;
 import model.StudentModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.annotation.SessionScope;
 import service.LessonInfoService;
-
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 
@@ -21,10 +21,10 @@ public class LessonInfoControl {
     @Qualifier("lessonInfoService")
     LessonInfoService lessonInfoService;
     @RequestMapping(params = "action=queryScore")
-    public String onQueryScore(HttpSession session, Model model){
+    public String onQueryScore(HttpSession session, Model model) throws Exception {
         StudentModel studentModel=(StudentModel) session.getAttribute("currentUser");
         ArrayList<LessonInfoModel>lessonInfoModelArrayList=lessonInfoService.getAllExam(studentModel.getUserId());
         model.addAttribute("lessonInfoList",lessonInfoModelArrayList);
-        return "myExam";
+        return "lessonCenter/myExam";
     }
 }

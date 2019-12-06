@@ -1,57 +1,157 @@
 package service;
 
+import dao.DaoManager;
 import dao.exam.ExamDao;
+import dao.paper.PaperDao;
+import dao.question.QuestionDao;
 
 import model.LessonInfoModel;
 import model.Paper;
 import model.Question;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service("doExamService")
 public class DoExamServiceImpl implements DoExamService {
-    @Autowired
-    @Qualifier("ExamDao")
-    private ExamDao examDao;
 
 
     public List<AbstractMap.SimpleEntry<Integer,String>> findAvailablePaper(String userId){
+        DaoManager dm=DaoManager.getInstance();
+        PaperDao paperDao = dm.getDao(PaperDao.class);
         ArrayList<AbstractMap.SimpleEntry<Integer,String>>paperList= new ArrayList<>();
-        AbstractMap.SimpleEntry<Integer,String> a=new AbstractMap.SimpleEntry<>(1,"第一次测试卷");
-        paperList.add(a);
+        List<Paper> paperListTemp = null;
+
+        try
+        {
+            dm.begin();
+            paperListTemp = paperDao.getPaperListByUserId(userId);
+            dm.commit();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            dm.end();
+        }
+        int paper_id;
+        String paper_name;
+        for (int i=0;i<paperListTemp.size();i++)
+        {
+            Paper paper=paperListTemp.get(i);
+            paper_name=paper.getPaperName();
+            paper_id=paper.getPaperId();
+            AbstractMap.SimpleEntry<Integer,String> a=new AbstractMap.SimpleEntry<>(paper_id,paper_name);
+            paperList.add(a);
+        }
         return paperList;
-        //TODO implement
+
         //输入userId，从student表找到classno，查paper表找到所有paper，将paperid和名字组合为simpleentry，放入arraylist返回
 
     }
 
     @Override
     public Paper getPaperCotent(int paperId) {
-        //TODO implement
+
+        DaoManager dm=DaoManager.getInstance();
+        PaperDao paperDao = dm.getDao(PaperDao.class);
+        QuestionDao questionDao=dm.getDao(QuestionDao.class);
         //输入paperId,从question表返回题目，要把题目分为单选多选，生成paper返回。
-        Paper paper=new Paper();
-        paper.setJoinDate(new Date());
-        paper.setPaperName("第一次测试卷假");
+        Paper paper=null;
+        try {
+            dm.begin();
+            paper=paperDao.getPaperByPaperId(paperId);
+            dm.commit();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            dm.end();
+        }
         ArrayList<Question> singleQuestion=new ArrayList<>();
-        Question a=new Question(1,"题目内容",1,new Date(),"AA","BB","CC","DD","A");
-        singleQuestion.add(a);
+        try{
+            dm.begin();
+            singleQuestion=questionDao.getSingleQuestionListByPaperId(String.valueOf(paperId));
+            dm.commit();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            dm.end();
+        }
         paper.setMultiQuestionList(singleQuestion);
+        ArrayList<Question> multiQuestion=new ArrayList<>();
+        try {
+            dm.begin();
+            multiQuestion=questionDao.getMultiQuestionListByPaperId(String.valueOf(paperId));
+            dm.commit();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            dm.end();
+        }
+
         paper.setSingleQuestionList(singleQuestion);
+        paper.setMultiQuestionList(multiQuestion);
         return paper;
     }
-    public void saveLessonInfo(LessonInfoModel lessonInfoModel){
-        return;
-        //TODO implement
+
+    public int saveLessonInfo(String userId,LessonInfoModel lessonInfoModel){
+        DaoManager dm=DaoManager.getInstance();
+        ExamDao examDao = dm.getDao(ExamDao.class);
+        int saveExam=-1;
+        int saveAnswer=-1;
+        try {
+            dm.begin();
+            saveExam=examDao.SaveExam(userId, lessonInfoModel);
+            saveAnswer=examDao.SaveAnwser(userId,lessonInfoModel.getMyAnswer());
+            dm.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            dm.end();
+        }
+
+        if(saveExam==0&&saveAnswer==0)
+        return  0;
+        else
+            return 1;
+        //将lessonInfoModel保存，应将信息存入lesson_info 和answer表，成功返回0,失败1
+
     }
+
     public ArrayList<Integer> calcuResult(Paper paper,Map<Integer,String > currentAnswer){
         ArrayList<Integer>tmp=new ArrayList<>();
-        tmp.add(40);
-        tmp.add(50);
+        int SingleScore=0;
+        int MultiScore=0;
+        int Anwer_id=0;
+        String Answer=null;
+        String StandardAnswer=null;
+        //获取paper的singlequestionlist循环获取列表题目，比较答案
+        Question question=null;
+        for (int i=0;i<paper.getSingleQuestionList().size();i++)
+        {  //计算单选成绩
+            question=paper.getSingleQuestionList().get(i);
+            Answer=currentAnswer.get(Anwer_id);
+            StandardAnswer=question.getAnswer();
+            Anwer_id++;
+            if(StandardAnswer.equals(Answer))
+                SingleScore++;
+        }
+        tmp.add(SingleScore);
+        //计算多选成绩
+        for (int i=0;i<paper.getMultiQuestionList().size();i++)
+        {  //计算单选成绩
+            question=paper.getMultiQuestionList().get(i);
+            Answer=currentAnswer.get(Anwer_id);
+            StandardAnswer=question.getAnswer();
+            Anwer_id++;
+            if(StandardAnswer.equals(Answer))
+                MultiScore++;
+        }
+        tmp.add(MultiScore);
         return tmp;
-        //TODO implement
+
         //currentAnswer为题号和答案的map，计算paper里单选和多选的成绩，依次存入arraylist返回。
     };
 

@@ -1,35 +1,42 @@
 package bean;
 
 public class PaperBean {
-
-    private int class_no;
-    private String join_date;
-    private String paper_name;
+    private int id;
+    private int classNo;
+    private String joinDate;
+    private String paperName;
 
     public PaperBean(){}
 
-
-    public String getJoin_date() {
-        return join_date;
+    public int getId() {
+        return id;
     }
 
-    public void setJoin_date(String join_date) {
-        this.join_date = join_date;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getPaper_name() {
-        return paper_name;
+    public String getJoinDate() {
+        return joinDate;
     }
 
-    public void setPaper_name(String paper_name) {
-        this.paper_name = paper_name;
+    public void setJoinDate(String joinDate) {
+        this.joinDate = joinDate;
     }
 
-    public int getClass_no() {
-        return class_no;
+    public int getClassNo() {
+        return classNo;
     }
 
-    public void setClass_no(int class_no) {
-        this.class_no = class_no;
+    public void setClassNo(int classNo) {
+        this.classNo = classNo;
+    }
+
+    public String getPaperName() {
+        return paperName;
+    }
+
+    public void setPaperName(String paperName) {
+        this.paperName = paperName;
     }
 }

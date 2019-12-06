@@ -28,48 +28,55 @@ public class UserInfoControl {
     @Qualifier("changePasswordService")
     private ChangePasswordService changePasswordService;
 
+    private String identity;
     private UserModel userModel;
     @RequestMapping(params = "action=login")
-    public String onLogin(String userId, String password, HttpSession session, String identity, Model model) {
+    public String onLogin(String userId, String password, HttpSession session, String identityFlag, Model model) {
+
+        if("teacher".equals(identityFlag)){
+            identity="teacher";
+        }
+        else{
+            identity="student";
+        }
         this.userModel=loginService.userLogin(userId, password,identity);
         if(userModel==null ){
             model.addAttribute("loginState","用户名或密码错误");
-            return "../login";
+            return "userCenter/login";
         }
 
         else {
-            if("student".equals(identity)){
-                StudentModel student = new StudentModel(userModel.getUserId(),userModel.getName(),null,null,null,-1,null);
-                this.userModel=student;
-                session.setAttribute("currentUser", student);
-                session.setAttribute("currentUserIdentity","student");
-                return "main";
-            }
-            else{
+            if("teacher".equals(identity)){
                 TeacherModel teacher = new TeacherModel(userModel.getUserId(),userModel.getName(),null,null,null);
                 this.userModel=teacher;
                 session.setAttribute("currentUser", teacher);
                 session.setAttribute("currentUserIdentity","teacher");
-                return "main";
+                return "state/main";
+            }
+            else{
+                StudentModel student = new StudentModel(userModel.getUserId(),userModel.getName(),null,userModel.getPassword(),null,-1,null);
+                this.userModel=student;
+                session.setAttribute("currentUser", student);
+                session.setAttribute("currentUserIdentity","student");
+                return "state/main";
             }
         }
     }
     @RequestMapping(params = "action=logout")
     public String logout(HttpSession session){
-        System.out.println(session);
         this.userModel=null;
         this.loginService=null;
         session.invalidate();
-        return "../login";
+        return "userCenter/login";
     }
     @RequestMapping(params = "action=changePassword")
     public String onChangePassword(String rawPassword,String newPassword){
-        int ret=changePasswordService.changePassword(userModel.getUserId(),rawPassword,newPassword);
+        int ret=changePasswordService.changePassword(userModel.getUserId(),rawPassword,newPassword,identity);
         if(ret==0){
-            return "updateSuccess";
+            return "state/updateSuccess";
         }
         else{
-            return "updatePassword";
+            return "userCenter/updatePassword";
         }
     }
 }

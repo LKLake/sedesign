@@ -51,46 +51,49 @@
     <div class="data_content">
         <strong><big>一，单选题</big></strong>（每题20分，答错不得分）<br/><br/>
         <form id="myForm" action="doExam?action=submit" method="post">
-            <input type="hidden" name="submit_exam">
-<%--            <input type="hidden" name="exam.paper.id" value="${paper.id }"/>--%>
+<%--            <input type="hidden" name="submit_exam">--%>
+<%--            <input type="hidden" name="lessonInfo.paper.id" value="${paper.id }"/>--%>
             <c:forEach var="s" items="${paper.singleQuestionList }" varStatus="status">
                 <strong>[&nbsp;${status.index+1}&nbsp;]&nbsp;${s.content }</strong><br/><br/>
+                <input type="hidden" name="questionId" value=${s.id}>
                 <label class="radio">
-                    <input type="radio" name="id-r-${s.id }"  value="A">
+                    <input type="radio" name="singleAnswer"  value="A">
                         ${s.optionA }
                 </label>
                 <label class="radio">
-                    <input type="radio" name="id-r-${s.id }"  value="B">
+                    <input type="radio" name="singleAnswer"  value="B">
                         ${s.optionB }
                 </label>
                 <label class="radio">
-                    <input type="radio" name="id-r-${s.id }"  value="C">
+                    <input type="radio" name="singleAnswer"  value="C">
                         ${s.optionC }
                 </label>
                 <label class="radio">
-                    <input type="radio" name="id-r-${s.id }"  value="D">
+                    <input type="radio" name="singleAnswer"  value="D">
                         ${s.optionD }
                 </label>
                 <br/>
             </c:forEach>
             <strong><big>二，多选题</big></strong>（每题30分，答错不得分）<br/><br/>
             <c:forEach var="m" items="${paper.multiQuestionList }" varStatus="status">
+                <input type="hidden" name="questionId" value=${m.id}>
                 <strong>[&nbsp;${status.index+1}&nbsp;]&nbsp;${m.content }</strong><br/><br/>
                 <label class="checkbox">
-                    <input type="checkbox" name="id-c-${m.id }" value="A">
+                    <input type="checkbox" name="multiAnswer" value="A">
                         ${m.optionA }
                 </label>
                 <label class="checkbox">
-                    <input type="checkbox" name="id-c-${m.id }" value="B">
+                    <input type="checkbox" name="multiAnswer" value="B">
                         ${m.optionB }
                 </label>
                 <label class="checkbox">
-                    <input type="checkbox" name="id-c-${m.id }" value="C">
+                    <input type="checkbox" name="multiAnswer" value="C">
                         ${m.optionC }
                 </label>
                 <label class="checkbox">
-                    <input type="checkbox" name="id-c-${m.id }" value="D">
+                    <input type="checkbox" name="multiAnswer" value="D">
                         ${m.optionD }
+                    <input type="hidden" name="multiAnswer" value="|">
                 </label>
                 <br/>
             </c:forEach>

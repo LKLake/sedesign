@@ -10,25 +10,23 @@
 <link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 <script src="${pageContext.request.contextPath}/bootstrap/js/jQuery.js"></script>
 <script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.js"></script>
-
-<%--<script src="${pageContext.request.contextPath}/js/My97DatePicker/WdatePicker.js"></script>--%>
 </head>
 <%
 	String mainPage=(String)request.getAttribute("mainPage");
 	if(mainPage==null || mainPage.equals("")){
-		mainPage="common/default.jsp";
+		mainPage="../common/default.jsp";
 	}
 %>
 <body>
 <table width="1000px;" align="center">
 	<tr>
 		<td>
-			<jsp:include page="common/head.jsp"/>
+			<jsp:include page="../common/head.jsp"/>
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<jsp:include page="common/menu.jsp"/>
+			<jsp:include page="../common/menu.jsp"/>
 		</td>
 	</tr>
 	<tr>
@@ -38,7 +36,7 @@
 	</tr>
 	<tr>
 		<td>
-			<jsp:include page="common/foot.jsp"/>
+			<jsp:include page="../common/foot.jsp"/>
 		</td>
 	</tr>
 </table>

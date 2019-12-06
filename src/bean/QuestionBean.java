@@ -3,13 +3,14 @@ package bean;
 
 public class QuestionBean {
     private int id;
+    private int paperId;
     private String answer;
-    private String added_time;
+    private String addedTime;
     private String optionA;
     private String optionB;
     private String optionC;
     private String optionD;
-    private String subject;
+    private String content;
     private String type;
 
     public QuestionBean(){}
@@ -21,6 +22,22 @@ public class QuestionBean {
         this.id = id;
     }
 
+    public int getPaperId() {
+        return paperId;
+    }
+
+    public void setPaperId(int paperId) {
+        this.paperId = paperId;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     public String getAnswer() {
         return answer;
     }
@@ -29,12 +46,12 @@ public class QuestionBean {
         this.answer = answer;
     }
 
-    public String getAdded_time() {
-        return added_time;
+    public String getAddedTime() {
+        return addedTime;
     }
 
-    public void setAdded_time(String added_time) {
-        this.added_time = added_time;
+    public void setAddedTime(String addedTime) {
+        this.addedTime = addedTime;
     }
 
     public String getOptionA() {
@@ -69,13 +86,6 @@ public class QuestionBean {
         this.optionD = optionD;
     }
 
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
 
     public String getType() {
         return type;
