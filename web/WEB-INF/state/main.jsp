@@ -10,35 +10,37 @@
 <link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 <script src="${pageContext.request.contextPath}/bootstrap/js/jQuery.js"></script>
 <script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.js"></script>
+    <style type="text/css">
+        #main_area{
+            width: 1000px;
+            height: 100vmin;
+            margin: 0 auto;
+            background: rgb(250,250,250);
+            box-shadow: 5px 5px 5px rgba(0,0,0,.5), -5px 5px 5px rgba(255,255,255,.5);
+        }
+    </style>
 </head>
-<%
-	String mainPage=(String)request.getAttribute("mainPage");
-	if(mainPage==null || mainPage.equals("")){
-		mainPage="../common/default.jsp";
-	}
-%>
-<body>
-<table width="1000px;" align="center">
-	<tr>
-		<td>
-			<jsp:include page="../common/head.jsp"/>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<jsp:include page="../common/menu.jsp"/>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<jsp:include page="<%=mainPage %>"/>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<jsp:include page="../common/foot.jsp"/>
-		</td>
-	</tr>
-</table>
+
+<body style="background: url('${pageContext.request.contextPath}/image/background.png')">
+<div id="main_area">
+    <table align="center" style="height:100vmin;">
+        <tr style="height: 5vmin">
+            <td>
+                <jsp:include page="../common/head.jsp"/>
+            </td>
+        </tr>
+        <tr style="height: 5vmin">
+            <td>
+                <jsp:include page="../common/menu.jsp"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <jsp:include page="../common/foot.jsp"/>
+            </td>
+        </tr>
+    </table>
+</div>
+
 </body>
 </html>

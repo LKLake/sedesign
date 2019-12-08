@@ -64,7 +64,7 @@ public class ClassInfoServiceImpl implements ClassInfoService {
 
     }
     @Override
-    //todo:mayhaveproblem
+
     public int changeStudentInfo(String userId,String name,String sex,String password,String major,String classNo){
         return 0;//表示修改成功,-1修改失败
         //TODO implement

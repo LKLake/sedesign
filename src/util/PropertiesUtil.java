@@ -12,7 +12,7 @@ public class PropertiesUtil {
         try {
             prop.load(in);    //对对象的操作
         } catch (IOException e) {
-            // TODO Auto-generated catch block
+            // Auto-generated catch block
             e.printStackTrace();
         }
         return (String)prop.get(key);
