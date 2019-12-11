@@ -1,6 +1,15 @@
 import dao.DaoManager;
+import dao.paper.PaperDao;
+import dao.paper.PaperDaoImp;
+import dao.question.QuestionDao;
+import dao.question.QuestionDaoImp;
+import model.Paper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import service.ChangePasswordService;
+import service.ChangePasswordServiceImpl;
+import service.DoExamService;
+import service.DoExamServiceImpl;
 
 import javax.naming.Context;
 import javax.servlet.ServletException;

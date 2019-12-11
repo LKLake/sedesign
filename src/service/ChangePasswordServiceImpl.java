@@ -11,43 +11,71 @@ import org.springframework.stereotype.Service;
 public class ChangePasswordServiceImpl implements ChangePasswordService {
 
 
-    public int changePassword(String userId,String rawPassword,String newPassword,String identity)  {
-        DaoManager dm=DaoManager.getInstance();
+    public int changePassword(String userId,String rawPassword,String newPassword,String ackPassword,String identity)  {
+//        int result=-1;
+//        DaoManager dm=DaoManager.getInstance();
+//        StudentDao studentDao = dm.getDao(StudentDao.class);
+//        TeacherDao teacherDao= dm.getDao(TeacherDao.class);
+//        UserDao userDao;
+//        if("student".equals(identity))
+//            userDao =studentDao;
+//        else
+//            userDao =teacherDao;
+//        //匹配用户名与原密码，若一致，修改密码为新密码。正确返回0，出错返回-1;
+//        if(rawPassword.equals(newPassword))
+//            return 1;
+//
+//        try
+//        {
+//            dm.begin();
+//            result=userDao.updatePasswordByUserId(userId,newPassword);
+//            dm.commit();
+//        }
+//        catch (Exception e)
+//        {
+//            return 1;
+//        }finally
+//        {
+//            dm.end();
+//        }
+//        return result;
+//    }
+        int result;
+        DaoManager dm = DaoManager.getInstance();
         StudentDao studentDao = dm.getDao(StudentDao.class);
-        TeacherDao teacherDao= dm.getDao(TeacherDao.class);
+        TeacherDao teacherDao = dm.getDao(TeacherDao.class);
         UserDao userDao;
-        if("student".equals(identity))
-            userDao =studentDao;
+        if ("student".equals(identity))
+            userDao = studentDao;
         else
-            userDao =teacherDao;
-        //匹配用户名与原密码，若一致，修改密码为新密码。正确返回0，出错返回-1;
-        String newUserId = null;
-        try {
-            dm.begin();
-            newUserId=(userDao.getUserByUserIdAndPassword(userId,rawPassword).getUserId());
-            dm.commit();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }finally
-        {
-            dm.end();
+            userDao = teacherDao;
+        if (newPassword.equals(ackPassword)) {//3
+            if (newPassword.matches("^(.){6,16}$")) {//5
+                if (newPassword.matches("[A-Za-z0-9_-]+$")) {
+                    if (rawPassword.equals(newPassword)) {
+                        return 0;
+                    }
+                    else{
+                        try {
+                            dm.begin();
+                            result = userDao.updatePasswordByUserId(userId, newPassword);
+                            dm.commit();
+                        } catch (Exception e) {
+                            return 1;
+                        } finally {
+                            dm.end();
+                        }
+                        return result;
+                    }
+                }
+                else {
+                    return 1;
+                }
+            }
+            else
+                return 1;
         }
-        if(!userId.equals(newUserId))
-            return -1;
-        try
-        {
-            dm.begin();
-            userDao.updatePasswordByUserId(userId,newPassword);
-            dm.commit();
-        }
-        catch (Exception e)
-        {
-            return -1;
-        }finally
-        {
-            dm.end();
-        }
-        return 0;
+        else
+            return 1;
     }
 }

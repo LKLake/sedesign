@@ -22,7 +22,7 @@ import java.util.*;
 @RequestMapping("/doExam")
 public class DoExamControl {
     private Paper currentPaper=null;
-    private Map<Integer,String> currentAnswer= new HashMap<>() {
+    private Map<Integer,String> currentAnswer= new HashMap<Integer, String>() {
     };
     @Autowired
     @Qualifier("doExamService")
@@ -48,8 +48,11 @@ public class DoExamControl {
             index++;
         }
         ArrayList<Integer> scoreList=doExamService.calcuResult(currentPaper,currentAnswer);
-        doExamService.saveLessonInfo(currentUser.getUserId(),new LessonInfoModel(new Date(),currentPaper,currentAnswer,scoreList.get(0),scoreList.get(1)));
-        model.addAttribute("score",scoreList.get(0)+scoreList.get(1));
+        LessonInfoModel lessonInfoModel=new LessonInfoModel(new Date(),currentPaper,currentAnswer,scoreList.get(0),scoreList.get(1));
+        doExamService.saveLessonInfo(currentUser.getUserId(),lessonInfoModel);
+        ArrayList<LessonInfoModel>tmp=new ArrayList<LessonInfoModel>();
+        tmp.add(lessonInfoModel);
+        model.addAttribute("lessonInfoList",tmp);
         return "lessonCenter/myExam";
     }
     @RequestMapping(params = "action=getAvailablePaper",method = RequestMethod.GET)

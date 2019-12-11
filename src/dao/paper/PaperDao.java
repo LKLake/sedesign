@@ -6,7 +6,8 @@ import model.Paper;
 import java.util.ArrayList;
 
 public interface PaperDao {
-    ArrayList<Paper> getPaperListByUserId(String userId) throws Exception;
+    ArrayList<Paper> getPaperListByClassId(String class_no) throws Exception;
     Paper getPaperByPaperId(int paperId) throws Exception;
     int AddPaper(PaperBean input);
+    String getPaperIdByPaperName(String paperName);
 }

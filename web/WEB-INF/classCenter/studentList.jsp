@@ -7,6 +7,8 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/no_empty.js"></script>
     <link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/style/main_area.css" rel="stylesheet">
+
     <script src="${pageContext.request.contextPath}/bootstrap/js/jQuery.js"></script>
     <script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.js"></script>
     <script type="text/javascript">
@@ -20,7 +22,7 @@
                 }
             }
             function func(content){
-                if(content==="modefied_success"){
+                if(content==="modified_success"){
                     alert("修改成功");
                 }
                 else{
@@ -63,18 +65,12 @@
             request(form,"${pageContext.request.contextPath}/classInfo?action=deleteStudentInfo",func);
         }
     </script>
-    <style type="text/css">
-        #main_area{
-            width: 1000px;
-            height: 100vmin;
-            margin: 0 auto;
-            background: rgb(250,250,250);
-            box-shadow: 5px 5px 5px rgba(0,0,0,.5), -5px 5px 5px rgba(255,255,255,.5);
-        }
-    </style>
+
 </head>
 <body style="background: url('${pageContext.request.contextPath}/image/background.png')">
 <div id="main_area">
+    <jsp:include page="../common/head.jsp"/>
+    <jsp:include page="../common/menu.jsp"/>
     <div class="data_list">
         <div class="data_info">
             <p>学生信息管理</p>

@@ -19,8 +19,17 @@ public class StudentDaoImpl extends BaseDao implements StudentDao, PostgreSQL {
 
     @Override
     public int updatePasswordByUserId(String userId, String newPassword) {
-        //TODO implement
+        int result=-1;
+        String sql="update t_student set password=?"+"where user_id=?";
+        try {
+            result=esql.update(sql,newPassword,userId);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        if(result==1)
         return 0;
+        else
+            return -1;
     }
 
     public List<StudentBean> getStudentBeanListByClass_no(String classid)
@@ -47,7 +56,10 @@ public class StudentDaoImpl extends BaseDao implements StudentDao, PostgreSQL {
         {
             e.printStackTrace();
         }
-        return result;
+        if(result!=-1)
+        return 0;
+        else
+            return 1;
     }
 
     @Override
@@ -77,7 +89,10 @@ public class StudentDaoImpl extends BaseDao implements StudentDao, PostgreSQL {
         {
             e.printStackTrace();
         }
-        return result;
+        if(result!=-1)
+         return 0;
+         else
+             return 1;
     }
 
     @Override
@@ -85,14 +100,31 @@ public class StudentDaoImpl extends BaseDao implements StudentDao, PostgreSQL {
                                     String sex, String password, String major, String classNo) {
         StudentBean input=new StudentBean();
         int result=-1;
-        String where="user_id="+"'"+userId+"'";
+        String sql="update t_student set name=? , sex=? , password=? , " +
+                "major=? , class_no=? "+"where user_id=?";
         try {
-            result=esql.update1(input,"t_student","","",
-                    where,name,sex,password,major,classNo);
+
+            result=esql.update1(sql,name,sex,password,major,classNo,userId);
         }catch (Exception e){
             e.printStackTrace();
         }
-        return result;
+        if(result==1)
+            return 0;
+        else
+            return 1;
+    }
+
+    @Override
+    public StudentBean getStudentBeanByUserId(String userId) {
+        StudentBean resultBean = null;
+        String sql="select * from t_student where user_id=?";
+        try {
+            resultBean=esql.query(StudentBean.class,sql,userId);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return resultBean;
     }
 
 

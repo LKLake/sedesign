@@ -17,14 +17,23 @@ public class TeacherDaoImpl extends BaseDao implements TeacherDao, PostgreSQL {
 
     @Override
     public int updatePasswordByUserId(String userId, String newPassword) {
-        return 0;
-        //TODO implement
+        int result=-1;
+        String sql="update t_teacher set password=?"+"where user_id=?";
+        try {
+            result=esql.update(sql,newPassword,userId);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        if(result==1)
+            return 0;
+        else
+        return 1;
     }
 
     @Override
     public int getClass_noByTeacherId(String userId) throws Exception {
         int result=-1;
-        String sql="selct class_no from t_class_info where teacher_id=?";
+        String sql="select class_no from t_class_info where teacher_id=?";
         result=esql.query(Integer.class,sql,userId);
         return result;
     }

@@ -5,6 +5,7 @@ import dao.exam.ExamDao;
 import dao.paper.PaperDao;
 import dao.question.QuestionDao;
 
+import dao.user.StudentDao;
 import model.LessonInfoModel;
 import model.Paper;
 import model.Question;
@@ -19,13 +20,16 @@ public class DoExamServiceImpl implements DoExamService {
     public List<AbstractMap.SimpleEntry<Integer,String>> findAvailablePaper(String userId){
         DaoManager dm=DaoManager.getInstance();
         PaperDao paperDao = dm.getDao(PaperDao.class);
+        StudentDao studentDao=dm.getDao(StudentDao.class);
         ArrayList<AbstractMap.SimpleEntry<Integer,String>>paperList= new ArrayList<>();
         List<Paper> paperListTemp = null;
 
         try
         {
             dm.begin();
-            paperListTemp = paperDao.getPaperListByUserId(userId);
+            //todo:useriD2CLASSid
+            int classId=studentDao.getStudentBeanByUserId(userId).getClassNo();
+            paperListTemp = paperDao.getPaperListByClassId(String.valueOf(classId));
             dm.commit();
         }
         catch (Exception e)
@@ -79,7 +83,7 @@ public class DoExamServiceImpl implements DoExamService {
         }finally {
             dm.end();
         }
-        paper.setMultiQuestionList(singleQuestion);
+//        paper.setMultiQuestionList(singleQuestion);
         ArrayList<Question> multiQuestion=new ArrayList<>();
         try {
             dm.begin();
@@ -99,12 +103,19 @@ public class DoExamServiceImpl implements DoExamService {
     public int saveLessonInfo(String userId,LessonInfoModel lessonInfoModel){
         DaoManager dm=DaoManager.getInstance();
         ExamDao examDao = dm.getDao(ExamDao.class);
+        PaperDao paperDao = dm.getDao(PaperDao.class);
         int saveExam=-1;
         int saveAnswer=-1;
+        String lessonInfo_id=null;
+        String paper_id=null;
         try {
             dm.begin();
+
+            paper_id=String.valueOf(lessonInfoModel.getPaper().getPaperId());
+            lessonInfo_id=examDao.getLessonInfoIdByUserIdAndPaperId(userId,paper_id);
+
             saveExam=examDao.SaveExam(userId, lessonInfoModel);
-            saveAnswer=examDao.SaveAnwser(userId,lessonInfoModel.getMyAnswer());
+            saveAnswer=examDao.SaveAnwser(lessonInfo_id,lessonInfoModel.getMyAnswer());
             dm.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -112,7 +123,7 @@ public class DoExamServiceImpl implements DoExamService {
             dm.end();
         }
 
-        if(saveExam==0&&saveAnswer==0)
+        if(saveExam==1&&saveAnswer==1)
         return  0;
         else
             return 1;
@@ -124,30 +135,38 @@ public class DoExamServiceImpl implements DoExamService {
         ArrayList<Integer>tmp=new ArrayList<>();
         int SingleScore=0;
         int MultiScore=0;
-        int Anwer_id=0;
+        int Anwer_id=-1;
+        for (Map.Entry<Integer,String>entry:currentAnswer.entrySet())
+        {
+            Anwer_id=entry.getKey();
+            break;
+        }
+
         String Answer=null;
-        String StandardAnswer=null;
+        String StandardAnswer;
         //获取paper的singlequestionlist循环获取列表题目，比较答案
-        Question question=null;
+        Question question;
         for (int i=0;i<paper.getSingleQuestionList().size();i++)
         {  //计算单选成绩
             question=paper.getSingleQuestionList().get(i);
             Answer=currentAnswer.get(Anwer_id);
             StandardAnswer=question.getAnswer();
+            StandardAnswer=StandardAnswer.trim();
             Anwer_id++;
             if(StandardAnswer.equals(Answer))
-                SingleScore++;
+                SingleScore+=20;
         }
         tmp.add(SingleScore);
         //计算多选成绩
         for (int i=0;i<paper.getMultiQuestionList().size();i++)
-        {  //计算单选成绩
+        {  //计算多选成绩
             question=paper.getMultiQuestionList().get(i);
             Answer=currentAnswer.get(Anwer_id);
             StandardAnswer=question.getAnswer();
+            StandardAnswer=StandardAnswer.trim();
             Anwer_id++;
             if(StandardAnswer.equals(Answer))
-                MultiScore++;
+                MultiScore+=30;
         }
         tmp.add(MultiScore);
         return tmp;

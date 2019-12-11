@@ -4,6 +4,7 @@ import bean.PaperBean;
 import dao.DaoManager;
 import dao.paper.PaperDao;
 
+import dao.question.QuestionDao;
 import dao.user.TeacherDao;
 import model.Paper;
 
@@ -19,6 +20,7 @@ public class MakePaperServiceImpl implements MakePaperService {
         DaoManager dm=DaoManager.getInstance();
         TeacherDao teacherDao = dm.getDao(TeacherDao.class);
         PaperDao paperDao=dm.getDao(PaperDao.class);
+        QuestionDao questionDao=dm.getDao(QuestionDao.class);
         int result=-1;
         int class_no = 0;
         String paper_name=paper.getPaperName();
@@ -51,7 +53,30 @@ public class MakePaperServiceImpl implements MakePaperService {
         }finally {
             dm.end();
         }
-        return result;
+        String paperId="-1";
+        int single_res=-1;
+        int multi_res=-1;
+        if(result==1)
+            try {
+                dm.begin();
+                paperId=paperDao.getPaperIdByPaperName(paper_name);
+                single_res=questionDao.addSingleQuestion(paper.getSingleQuestionList(),paperId);
+                multi_res=questionDao.addMultiQuestion(paper.getMultiQuestionList(),paperId);
+                dm.commit();
+            }catch (Exception e){e.printStackTrace();}
+        finally {
+                dm.end();
+            }
+        if(Integer.valueOf(paperId)==-1)
+            System.out.println("paperId有问题");
+        if (single_res==1)
+            System.out.println("单选添加失败");
+        if (multi_res==1)
+            System.out.println("多选添加失败");
+        if(multi_res==0&&single_res==0&&result==1)
+        return 0;
+        else
+            return 1;
 
     }
 }

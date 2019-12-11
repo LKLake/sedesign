@@ -3,6 +3,8 @@
 <head>
     <link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/style/main_area.css" rel="stylesheet">
+
     <script src="${pageContext.request.contextPath}/bootstrap/js/jQuery.js"></script>
     <script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.js"></script>
     <script type="text/javascript">
@@ -40,18 +42,12 @@
 
         window.setInterval("showCount()",1000);
     </script>
-    <style type="text/css">
-        #main_area{
-            width: 1000px;
-            height: 100vmin;
-            margin: 0 auto;
-            background: rgb(250,250,250);
-            box-shadow: 5px 5px 5px rgba(0,0,0,.5), -5px 5px 5px rgba(255,255,255,.5);
-        }
-    </style>
+
 </head>
 <body style="background: url('${pageContext.request.contextPath}/image/background.png')">
 <div id="main_area">
+    <jsp:include page="../common/head.jsp"/>
+    <jsp:include page="../common/menu.jsp"/>
     <div class="data_list">
         <div class="data_info">
             <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;考试时间：<strong>20分钟</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -69,20 +65,20 @@
                 <c:forEach var="s" items="${paper.singleQuestionList }" varStatus="status">
                     <strong>[&nbsp;${status.index+1}&nbsp;]&nbsp;${s.content }</strong><br/><br/>
                     <input type="hidden" name="questionId" value=${s.id}>
-                    <label class="radio">
-                        <input type="radio" name="singleAnswer"  value="A">
+                    <label class="radio" >
+                        <input type="checkbox" name="singleAnswer"  value="A">
                             ${s.optionA }
                     </label>
                     <label class="radio">
-                        <input type="radio" name="singleAnswer"  value="B">
+                        <input type="checkbox" name="singleAnswer"  value="B">
                             ${s.optionB }
                     </label>
                     <label class="radio">
-                        <input type="radio" name="singleAnswer"  value="C">
+                        <input type="checkbox" name="singleAnswer"  value="C">
                             ${s.optionC }
                     </label>
                     <label class="radio">
-                        <input type="radio" name="singleAnswer"  value="D">
+                        <input type="checkbox" name="singleAnswer"  value="D">
                             ${s.optionD }
                     </label>
                     <br/>

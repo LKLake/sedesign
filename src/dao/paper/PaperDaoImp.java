@@ -13,12 +13,12 @@ import java.util.List;
 
 @Repository("paperDao")
 public class PaperDaoImp extends BaseDao implements PaperDao, PostgreSQL {
-    public ArrayList<Paper> getPaperListByUserId(String userId) throws Exception {
+    public ArrayList<Paper> getPaperListByClassId(String class_no) throws Exception {
 
         ArrayList<Paper> result = new ArrayList<>();
-        List<PaperBean> paperList=new ArrayList<>();
-        String sql="select * from t_paper ";
-        paperList=esql.list(PaperBean.class,sql);
+        List<PaperBean> paperList;
+        String sql="select * from t_paper where class_no=?";
+        paperList=esql.list(PaperBean.class,sql,class_no);
         for(int i=0;i<paperList.size();i++)
         {
             //从List获取对象，可能有问题？
@@ -54,6 +54,18 @@ public class PaperDaoImp extends BaseDao implements PaperDao, PostgreSQL {
             e.printStackTrace();
         }
         return result;
+    }
+
+    @Override
+    public String getPaperIdByPaperName(String paperName) {
+        String paperId;
+        PaperBean paperBean=new PaperBean();
+        String sql="select * from t_paper where paper_name=?";
+        try {
+            paperBean=esql.query(PaperBean.class,sql,paperName);
+        }catch (Exception e){e.printStackTrace();}
+        paperId=String.valueOf(paperBean.getId());
+        return paperId;
     }
 
     protected Paper PaperBean2Paper(PaperBean tmpB)

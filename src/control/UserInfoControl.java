@@ -70,9 +70,10 @@ public class UserInfoControl {
         return "userCenter/login";
     }
     @RequestMapping(params = "action=changePassword")
-    public String onChangePassword(String rawPassword,String newPassword){
-        int ret=changePasswordService.changePassword(userModel.getUserId(),rawPassword,newPassword,identity);
+    public String onChangePassword(String rawPassword,String newPassword,String newPasswordAck,HttpSession session){
+        int ret=changePasswordService.changePassword(userModel.getUserId(),rawPassword,newPasswordAck,newPassword,identity);
         if(ret==0){
+            session.invalidate();
             return "state/updateSuccess";
         }
         else{

@@ -5,12 +5,12 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/hit_table.js"></script>
     <link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/style/main_area.css" rel="stylesheet">
+
     <script src="${pageContext.request.contextPath}/bootstrap/js/jQuery.js"></script>
     <script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.js"></script>
     <script>
         function on_change_paper(){
-
-
             var selected_item=document.getElementById("paperName");
             var selected_name=selected_item.options[selected_item.selectedIndex].innerText;
             var student_id=document.getElementById("studentId").value;
@@ -20,19 +20,13 @@
                 "background-color:green","display:none","reset_first")
         }
     </script>
-    <style type="text/css">
-        #main_area{
-            width: 1000px;
-            height: 100vmin;
-            margin: 0 auto;
-            background: rgb(250,250,250);
-            box-shadow: 5px 5px 5px rgba(0,0,0,.5), -5px 5px 5px rgba(255,255,255,.5);
-        }
-    </style>
+
 </head>
 
 <body style="background: url('${pageContext.request.contextPath}/image/background.png')">
 <div id="main_area">
+    <jsp:include page="../common/head.jsp"/>
+    <jsp:include page="../common/menu.jsp"/>
     <div class="data_list">
         <div class="data_info">
             <p>学生成绩列表</p>
@@ -41,7 +35,7 @@
         <div class="search_content">
             <table align="center">
                 <tr>
-                    <td><label><strong>请选择作业测试卷：</strong></label></td>
+                    <td><label><strong>请选择试卷：</strong></label></td>
                     <td>
                         <select id="paperName" name="paperName">
                             <option value="">请选择...</option>

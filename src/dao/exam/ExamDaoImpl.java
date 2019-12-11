@@ -39,7 +39,7 @@ public class ExamDaoImpl extends BaseDao implements ExamDao, PostgreSQL {
         String exclude="";
         try
         {
-            result=esql.insert(lessonInfoBean,table,"","");
+            result=esql.insert(lessonInfoBean,table,"","id");
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -47,21 +47,18 @@ public class ExamDaoImpl extends BaseDao implements ExamDao, PostgreSQL {
     }
 
     @Override
-    public int SaveAnwser(String userId,Map<Integer,String> map) {
+    public int SaveAnwser(String LessonInfoId,Map<Integer,String> map) {
         int result=-1;
         String question_id;
         String anwser;
-        String table="t_anwser";
-//        String lessinfoId=input;
+        String table="t_answer";
         AnswerBean answerBean=new AnswerBean();
         Set<Map.Entry<Integer, String>> entrys = map.entrySet();
         for (Map.Entry<Integer,String> entry:entrys)
         {
-//            question_id=String.valueOf(entry.getKey());
-//            anwser=entry.getValue();
             answerBean.setAnswer(entry.getValue());
             answerBean.setQuestionId(entry.getKey());
-//            answerBean.setExamId(lessinfoId);
+            answerBean.setLessonInfoId(Integer.valueOf(LessonInfoId));
             try {
                 result=esql.insert(answerBean,table,"","");
             }catch (Exception e)
@@ -72,6 +69,21 @@ public class ExamDaoImpl extends BaseDao implements ExamDao, PostgreSQL {
 
 
 
+        return result;
+    }
+
+    public String getLessonInfoIdByUserIdAndPaperId(String userId,String paperId)
+    {
+        LessonInfoBean lessonInfoBean=null;
+        String result=null;
+        String sql="select * from t_lesson_info where student_id=?";
+        try {
+            lessonInfoBean=esql.query(LessonInfoBean.class,sql,userId);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        result=String.valueOf(lessonInfoBean.getId());
         return result;
     }
 }

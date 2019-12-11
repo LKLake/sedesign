@@ -47,9 +47,9 @@ public class ClassInfoControl {
         String major=(String) a.get("major");
         String classNo=(String) a.get("classNo");
         if(0==classInfoService.changeStudentInfo(userId,name,sex,password,major,classNo))
-            return "modefied_success";
+            return "modified_success";
         else
-            return "modefied_faliled";
+            return "modified_failed";
     }
     @RequestMapping(params = "action=deleteStudentInfo")
     @ResponseBody
@@ -60,7 +60,7 @@ public class ClassInfoControl {
         if(0==classInfoService.deleteStudentInfo(userId,name))
             return "delete_success";
         else
-            return "delete_faliled";
+            return "delete_failed";
     }
     @RequestMapping(params = "action=addStudent")
     public String onAddStudent(StudentModel studentModel, Model model){
