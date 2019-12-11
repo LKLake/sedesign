@@ -104,7 +104,7 @@ public class StudentDaoImpl extends BaseDao implements StudentDao, PostgreSQL {
                 "major=? , class_no=? "+"where user_id=?";
         try {
 
-            result=esql.update1(sql,name,sex,password,major,classNo,userId);
+            result=esql.update(sql,name,sex,password,major,classNo,userId);
         }catch (Exception e){
             e.printStackTrace();
         }

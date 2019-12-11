@@ -54,7 +54,7 @@ public class ClassInfoServiceImpl implements ClassInfoService {
             tmp.setMajor(ts.get(i).getMajor());
             tmp.setName(ts.get(i).getName());
             tmp.setPassword(ts.get(i).getPassword());
-            tmp.setSex(null);
+            tmp.setSex(ts.get(i).getSex());
             tmp.setUserId(ts.get(i).getUserId());
             tmp.setLessonInfoList(null);
             studentModelArrayList.add(tmp);
@@ -69,9 +69,14 @@ public class ClassInfoServiceImpl implements ClassInfoService {
         DaoManager dm=DaoManager.getInstance();
         StudentDao studentDao=dm.getDao(StudentDao.class);
         try {
+            dm.begin();
             result=studentDao.ChaneStudentInfoById(userId,name,sex,password,
                     major,classNo);
-        }catch (Exception e){e.printStackTrace();}
+            dm.commit();
+        }catch (Exception e){
+            e.printStackTrace();
+            dm.end();
+        }
 
         return result;//0表示修改成功,-1修改失败
         //通过userid可以确定这个学生，然后修改student表，目前先别cascade，出现冲突就返回1吧。
